@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+.app-container {
+    display: flex;
+    height: 100vh;
+
+  }
+  
+  app-navbar {
+    //width: 200px;
+    width: 17%;
+    min-width: 170px;
+    max-width: 240px;
+    padding:10px;
+
+    background-color: pink; /* ou la largeur que vous souhaitez pour la navbar */
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+
+  nav {
+    color: blue;
+  }
+  
+  .container-navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligne tout le contenu à la fin du conteneur */
+    height: 70vh;
+  }
+.user-navbar{
+ //position:relative;
+ //bottom:0;
+ height:230px;
+ 
+ margin-top: auto;
+ 
+ background-color: yellow;
+}

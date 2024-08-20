@@ -1,0 +1,16 @@
+<p>LOGO SORTIR</p>
+
+<div class="container" [formGroup]="loginForm">
+    <div>
+        <label for="username">Identifiant : </label>
+       <input type="text" id="username" formControlName="username"/>
+
+    </div>
+    <div>
+        <label for="password">Mot de passe :</label>
+         <input type="password"  id="password" formControlName="password"/>
+    </div>
+    <button type="button" (click)="connect()">Connexion</button>
+    <p> <input type="checkbox"  id="isRemembered" formControlName="isRemembered">  Se souvenir de moi</p>
+    <p> TODO: mot de passe oublié</p>
+</div>
