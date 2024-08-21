@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EventsComponent } from './events/events.component';
 import { LoginComponent } from './login/login.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './service/auth.guard';
 
 export const routes: Routes = [
     {path:'', redirectTo:'/home',pathMatch:'full'},
