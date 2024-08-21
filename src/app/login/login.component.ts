@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../environment';
+import { AuthService } from '../service/auth.service';
+import Credentials from '../model/credentials';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +15,7 @@ import { environment } from '../../environment';
 })
 export class LoginComponent {
   private baseUrl: string = environment.baseUrl;
+  error!: string;
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -20,31 +23,21 @@ export class LoginComponent {
     isRemembered: new FormControl(false)
   });
 
-  constructor(private router: Router, private http:HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
 
-connect() {
-  this.http.post(`${this.baseUrl}/auth/authenticate`,this.loginForm.value).subscribe({
-    next: (data:any) => {
-      console.log('Response:', data);
-      if (data && data.token) {
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('fullName', data.fullName);
-        console.log('Token stored successfully:', data.token);
-        this.router.navigate(['/home']);
+  connect() {
+    this.authService.login(<Credentials>this.loginForm.value).subscribe({
+      next:
+        () => {
+          console.log("User is logged in");
+          this.router.navigate(['/home']);
+        },
+      error: (err) => {
+        this.error = err.message;
       }
-    },
-    error: (error: HttpErrorResponse) => {
-      console.error('Login failed', error);
-
-      if (error.status === 401) {
-        alert('Invalid credentials. Please try again.');
-      } else {
-        alert('An error occurred. Please try again later.');
-      }
-    }
-  })
-
-}
+    });
+    this.loginForm.reset();
+  }
 
 }
