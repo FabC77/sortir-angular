@@ -33,21 +33,21 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Date de l'événement</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="startDate">
+        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
         <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #startDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Fin des inscriptions</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="deadline">
+        <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline">
         <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="deadlinePicker">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #deadlinePicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Nombre maximal de participants (vous inclus)</mat-label>
