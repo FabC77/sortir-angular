@@ -1,0 +1,66 @@
+<p>new-event works!</p>
+
+<!-- <div class="container" [formGroup]="eventForm">
+    <div>
+        <label for="name">Nom de l'événement</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+    </div>
+    <div>
+        <label for="infos">Infos</label>
+        <input type="text" class="form-control" id="infos" formControlName="infos">
+    </div>
+    <div>
+        <label for="name">Nom de l'événement</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+    </div>
+</div> -->
+<div class="form-event" [formGroup]="eventForm">
+    <mat-form-field>
+        <mat-label>Nom de l'événement</mat-label>
+        <input matInput formControlName="name" (blur)="updateErrorMessage()" required />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Infos</mat-label>
+        <textarea matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Nom du lieu</mat-label>
+        <input matInput formControlName="locationName" required />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Adresse</mat-label>
+        <input matInput formControlName="address" required />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Date de l'événement</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startDate">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Fin des inscriptions</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="deadline">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Nombre maximal de participants (vous inclus)</mat-label>
+        <mat-select formControlName="maxMembers">
+            @for (num of numbers; track $index) {
+            <mat-option [value]="num">
+                {{ num }}
+            </mat-option>
+            }
+
+        </mat-select>
+    </mat-form-field>
+    <mat-slide-toggle formControlName="isDraft">Enregistrer en tant que brouillon</mat-slide-toggle>
+
+
+</div>
