@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../environment';
 import { AuthService } from '../service/auth.service';
@@ -16,14 +16,23 @@ import Credentials from '../model/credentials';
 export class LoginComponent {
   private baseUrl: string = environment.baseUrl;
   error!: string;
+  loginForm!: FormGroup;
 
-  loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    isRemembered: new FormControl(false)
-  });
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: [
+        '',
+        [Validators.required]
+      ],
+      password: [
+        '',
+        [Validators.required]
+      ],
+      isRemembered: false
+    })
 
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
+  }
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService, private formBuilder: FormBuilder) { }
 
 
   connect() {
@@ -38,6 +47,18 @@ export class LoginComponent {
       }
     });
     this.loginForm.reset();
+  }
+  invalidUsername() {
+    return this.loginForm.get('username')?.invalid &&
+      (this.loginForm.get('username')?.dirty || this.loginForm.get('username')?.touched);
+  }
+
+  invalidPassword() {
+    return this.loginForm.get('password')?.invalid &&
+      (this.loginForm.get('password')?.dirty || this.loginForm.get('password')?.touched);
+  }
+  invalidCredentials() {
+    return this.loginForm.pristine || this.loginForm.invalid;
   }
 
 }
