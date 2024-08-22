@@ -41,8 +41,15 @@
 
 .form-event{
   display: flex;
+  min-width: 500px;
+  max-width: 600px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  margin: 0 auto; 
+  
+}
+.form-event >*{
+  width: 100%;
 }
 
 

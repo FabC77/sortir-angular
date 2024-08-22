@@ -21,11 +21,16 @@ export class AddressInputComponent implements AfterViewInit {
     // Customize your Geocoder-Autocomplete options
     const options: GeocoderAutocompleteOptions = {
       // Add your options here
-      lang: 'fr',
+      
+      lang: "fr",
+      filter:{ByCountryCodeOptions:"fr"},
+      
+      limit: 5,
+
 
     };
 
     // Create an instance of Geocoder-Autocomplete
-    this.geocoderAutocomplete = new GeocoderAutocomplete(container, options);
+    this.geocoderAutocomplete = new GeocoderAutocomplete(container,environment.geoApiKey,options);
   }
 }

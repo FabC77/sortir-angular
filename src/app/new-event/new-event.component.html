@@ -23,15 +23,9 @@
         <mat-label>Infos</mat-label>
         <textarea matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Nom du lieu</mat-label>
-        <input matInput formControlName="locationName" required />
-    </mat-form-field>
  <app-address-input/>
-    <mat-form-field>
-        <mat-label>Adresse (old)</mat-label>
-        <input matInput formControlName="address" required />
-    </mat-form-field>
+ <br/>
+   
     <mat-form-field>
         <mat-label>Date de l'événement</mat-label>
         <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
