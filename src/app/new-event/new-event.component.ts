@@ -9,6 +9,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AddressInputComponent } from '../address-input/address-input.component';
 
 
 @Component({
@@ -16,7 +17,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   standalone: true,
   providers: [provideNativeDateAdapter()],
 
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule, MatSlideToggleModule, MatCheckboxModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, 
+    MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule, 
+    MatSlideToggleModule, MatCheckboxModule, AddressInputComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 
