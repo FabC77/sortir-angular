@@ -10,18 +10,26 @@
         <mat-label>Infos</mat-label>
         <textarea matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
     </mat-form-field>
- <app-address-input (addressSelected)="onAddressSelected($event)"/>
- <br/>
-   
+    <app-address-input (addressSelected)="onAddressSelected($event)" />
+    <br />
     <mat-form-field>
         <mat-label>Date de l'événement</mat-label>
-        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
+        <input matInput [matDatepicker]="startDatePicker" (dateChange)="onDateChange($event)" placeholder="DD/MM/YYYY">
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
-            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
-    </mat-form-field>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label>Heure de l'événement</mat-label>
+        <input matInput [ngxMatTimepicker]="pickerB"[format]="24" (timeSet)="onTimeChange($event)" placeholder="14:00" readonly>
+        <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
+      </mat-form-field>
+      <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
+      <div>TODO: duration</div>
+
     <mat-form-field>
         <mat-label>Fin des inscriptions</mat-label>
         <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline">
@@ -42,7 +50,6 @@
 
         </mat-select>
     </mat-form-field>
-    <mat-slide-toggle formControlName="isDraft">Enregistrer en tant que brouillon</mat-slide-toggle>
-
+    <mat-checkbox (change)="updateCheckbox($event.checked)">Enregistrer en tant que brouillon</mat-checkbox>
 
 </div>

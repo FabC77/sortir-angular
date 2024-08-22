@@ -26,7 +26,7 @@ export class AddressInputComponent implements AfterViewInit {
       lang: "fr",
       filter: { ByCountryCodeOptions: "fr" },
       limit: 5,
-      placeholder: "Saisissez une adresse"
+      placeholder: "Saisissez une adresse*"
       
 
 
