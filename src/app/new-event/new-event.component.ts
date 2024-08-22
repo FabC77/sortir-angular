@@ -8,7 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddressInputComponent } from '../address-input/address-input.component';
 
 
@@ -17,8 +17,8 @@ import { AddressInputComponent } from '../address-input/address-input.component'
   standalone: true,
   providers: [provideNativeDateAdapter()],
 
-  imports: [ReactiveFormsModule, MatFormFieldModule, 
-    MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule, 
+  imports: [ReactiveFormsModule, MatFormFieldModule,
+    MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
     MatSlideToggleModule, MatCheckboxModule, AddressInputComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,26 +35,41 @@ export class NewEventComponent {
       name: ['', Validators.required
       ],
       infos: [''],
-      isDraft:[false],
+      isDraft: [false],
       //TODO: picture, locationId
-      locationName: ['', Validators.required],
+      locationId:['',Validators.required],
+      locationName: [''],
+      longitude:[-1,Validators.required],
+      latitude:[-1,Validators.required],
+cityName: ['', Validators.required],
       address: ['', Validators.required],
       startDate: [new Date(), Validators.required],
       duration: [-1],
       deadline: [new Date(), Validators.required],
       maxMembers: [1, Validators.required],
     });
-}
-updateErrorMessage() {
-  const nameControl = this.eventForm.get('name');
-  const deadlineControl = this.eventForm.get('deadline');
-
-  if (nameControl?.hasError('required')) {
-    this.error.set('You must enter a name');
-  } else if (deadlineControl?.hasError('required')) {
-    this.error.set('You must enter a deadline');
-  } else {
-    this.error.set('');
   }
-}
+
+  onAddressSelected(location: any) {
+    console.log('Address selected (in parent):', location.properties);
+    this.eventForm.patchValue({
+      address:location.properties.formatted, 
+      locationName:location.properties.name,
+      longitude:location.properties.lon,
+      latitude:location.properties.lat,
+      cityName: location.properties.city
+    });
+  }
+  updateErrorMessage() {
+    const nameControl = this.eventForm.get('name');
+    const deadlineControl = this.eventForm.get('deadline');
+
+    if (nameControl?.hasError('required')) {
+      this.error.set('You must enter a name');
+    } else if (deadlineControl?.hasError('required')) {
+      this.error.set('You must enter a deadline');
+    } else {
+      this.error.set('');
+    }
+  }
 }

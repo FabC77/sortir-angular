@@ -1,19 +1,6 @@
 <p>new-event works!</p>
 
-<!-- <div class="container" [formGroup]="eventForm">
-    <div>
-        <label for="name">Nom de l'événement</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-    </div>
-    <div>
-        <label for="infos">Infos</label>
-        <input type="text" class="form-control" id="infos" formControlName="infos">
-    </div>
-    <div>
-        <label for="name">Nom de l'événement</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-    </div>
-</div> -->
+
 <div class="form-event" [formGroup]="eventForm">
     <mat-form-field>
         <mat-label>Nom de l'événement</mat-label>
@@ -23,7 +10,7 @@
         <mat-label>Infos</mat-label>
         <textarea matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
     </mat-form-field>
- <app-address-input/>
+ <app-address-input (addressSelected)="onAddressSelected($event)"/>
  <br/>
    
     <mat-form-field>
