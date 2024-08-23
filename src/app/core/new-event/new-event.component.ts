@@ -28,8 +28,8 @@ import { stringify } from 'querystring';
   imports: [ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
     MatSlideToggleModule, MatButton, MatCheckboxModule, AddressInputComponent,
-    FormsModule, NgxMatTimepickerModule, DurationComponent, 
-    NgxMatTimepickerModule,ConfirmDialogComponent],
+    FormsModule, NgxMatTimepickerModule, DurationComponent,
+    NgxMatTimepickerModule, ConfirmDialogComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './new-event.component.scss'
@@ -37,13 +37,13 @@ import { stringify } from 'querystring';
 export class NewEventComponent implements CanComponentDeactivate {
   eventForm!: FormGroup;
   error = signal('');
-  errorAddress:string='';
+  errorAddress: string = '';
   numbers: number[] = Array.from({ length: 200 }, (_, i) => i + 1);
   startDateTime!: Date;
   durationRaw!: Date;
   minDate: Date;
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private router:Router) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private router: Router) {
     this.minDate = new Date();
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -51,7 +51,7 @@ export class NewEventComponent implements CanComponentDeactivate {
       isDraft: [false],
       startDate: [undefined, Validators.required],
       eventTime: [undefined, Validators.required],
-      locationId: [null, Validators.required],
+      locationId: ['', Validators.required],
       locationName: [''],
       longitude: [-1, Validators.required],
       latitude: [-1, Validators.required],
@@ -64,21 +64,22 @@ export class NewEventComponent implements CanComponentDeactivate {
   }
 
   submit() {
-    this.updateErrorMessage();
 
     if (this.eventForm.valid) {
-  console.log("formulaire:"+JSON.stringify(this.eventForm.value));
-  
+      console.log("formulaire:" + JSON.stringify(this.eventForm.value));
+
     } else {
-      console.log("formulaire non envoyé"+ JSON.stringify(this.eventForm.value));
+      console.log("formulaire non envoyé" + JSON.stringify(this.eventForm.value));
 
       // Afficher les erreurs
       this.eventForm.markAllAsTouched(); // Marque tous les champs comme "touchés"
+      this.updateErrorMessage();
+
     }
-  
+
   }
   navigateTo(route: string) {
-  this.router.navigate([route])
+    this.router.navigate([route])
   }
   canDeactivate(): Observable<boolean> | boolean {
     if (this.eventForm.dirty) {
@@ -88,7 +89,7 @@ export class NewEventComponent implements CanComponentDeactivate {
         }
       });
 
-      return dialogRef.afterClosed(); 
+      return dialogRef.afterClosed();
     }
     return true;
   }
@@ -106,10 +107,10 @@ export class NewEventComponent implements CanComponentDeactivate {
   }
 
   onDateChange(event: any): void {
-    console.log("in OnDateChange");
-    
+    console.log("in OnDateChange"+event);
+
     const selectedDate = event.value;
-    this.updateStartDateTime(selectedDate, this.startDateTime?.getHours(), this.startDateTime?.getMinutes());
+    this.updateStartDateTime(selectedDate, this.startDateTime?.getHours() ?? 0, this.startDateTime?.getMinutes() ?? 0);
   }
 
   onTimeChange(event: string): void {
@@ -139,6 +140,7 @@ export class NewEventComponent implements CanComponentDeactivate {
   onAddressSelected(location: any) {
     console.log('Address selected (in parent):', location.properties);
     this.eventForm.patchValue({
+      locationId: location.properties.place_id,
       address: location.properties.formatted,
       locationName: location.properties.name,
       longitude: location.properties.lon,
@@ -156,11 +158,11 @@ export class NewEventComponent implements CanComponentDeactivate {
     } else if (deadlineControl?.hasError('required')) {
       this.error.set('You must enter a deadline');
     } else if (addressControl?.hasError('required')) {
-      this.errorAddress="L'adresse doit être sélectionnée";
+      this.errorAddress = "L'adresse doit être sélectionnée";
 
     } else {
       this.error.set('');
-      this.errorAddress=''
+      this.errorAddress = '';
     }
   }
 }

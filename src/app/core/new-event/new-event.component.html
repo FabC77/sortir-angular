@@ -9,13 +9,13 @@
   <div style="display:flex;">
     <mat-form-field style="flex:1; padding-right: 10px;">
       <mat-label>Date de l'événement</mat-label>
-      <input matInput [min]="minDate" [matDatepicker]="startDatePicker" (dateChange)="onDateChange($event)"
-        placeholder="DD/MM/YYYY" formControlName="startDate" required>
+      <input matInput [min]="minDate" formControlName="startDate" [matDatepicker]="startDatePicker"
+        placeholder="DD/MM/YYYY"  required>
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
-      <mat-datepicker #startDatePicker></mat-datepicker>
+      <mat-datepicker #startDatePicker  (dateChange)="onDateChange($event)"></mat-datepicker>
     </mat-form-field>
     <mat-form-field style="flex:1">
       <mat-label>Heure de l'événement</mat-label>
@@ -26,13 +26,10 @@
     <ngx-mat-timepicker #pickerB (timeSet)="onTimeChange($event)"></ngx-mat-timepicker>
   </div>
   <app-duration (valueChange)="onDurationChange($event)"></app-duration>
-  <app-address-input (addressSelected)="onAddressSelected($event)" />
-  @if (errorAddress.length > 0) {
-  <div>
-    <p>{{errorAddress}}</p>
-    <p>test</p>
-  </div>
-  }
+  <app-address-input (addressSelected)="onAddressSelected($event)"></app-address-input>
+ @if(errorAddress.length > 0){
+  <div><p>{{errorAddress}}</p></div>
+ }
   <br />
   <mat-form-field>
     <mat-label>Description</mat-label>
