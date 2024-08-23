@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from '../../environment';
-import { AuthService } from '../service/auth.service';
+import { environment } from '../../../environment';
+import { AuthService } from '../../service/auth.service';
 import Credentials from '../model/credentials';
 
 @Component({

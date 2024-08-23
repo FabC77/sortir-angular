@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { NavbarComponent } from "./navbar/navbar.component";
-import { LoginComponent } from "./login/login.component";
+import { NavbarComponent } from "./core/navbar/navbar.component";
+import { LoginComponent } from "./core/login/login.component";
 
 @Component({
   selector: 'app-root',

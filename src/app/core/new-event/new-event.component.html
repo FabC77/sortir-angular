@@ -14,7 +14,7 @@
     <br />
     <mat-form-field>
         <mat-label>Date de l'événement</mat-label>
-        <input matInput [matDatepicker]="startDatePicker" (dateChange)="onDateChange($event)" placeholder="DD/MM/YYYY">
+        <input matInput [matDatepicker]="startDatePicker" (dateChange)="onDateChange($event)" placeholder="DD/MM/YYYY" required>
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -24,11 +24,12 @@
       
       <mat-form-field>
         <mat-label>Heure de l'événement</mat-label>
-        <input matInput [ngxMatTimepicker]="pickerB"[format]="24" (timeSet)="onTimeChange($event)" placeholder="14:00" readonly>
+        <input matInput [ngxMatTimepicker]="pickerB"[format]="24" (timeSet)="onTimeChange($event)" placeholder="14:00" required readonly>
         <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
       </mat-form-field>
       <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
-      <div>TODO: duration</div>
+      <div>Durée : {{selectedDuration}}</div>
+        <app-duration  (valueChange)="onDurationChange($event)"></app-duration>
 
     <mat-form-field>
         <mat-label>Fin des inscriptions</mat-label>
@@ -51,5 +52,7 @@
         </mat-select>
     </mat-form-field>
     <mat-checkbox (change)="updateCheckbox($event.checked)">Enregistrer en tant que brouillon</mat-checkbox>
-
+<div>test :
+    <app-time-picker></app-time-picker>
+</div>
 </div>

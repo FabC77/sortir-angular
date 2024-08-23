@@ -55,5 +55,28 @@
 
 
 
+
+/* Optionnel : Changer la couleur de l'arrière-plan */
+.mat-slider-thumb-label .mat-slider-thumb {
+  background-color: #29cc9b !important; /* Exemple avec une couleur Material Design */
+}
+.mdc-slider__value-indicator {
+word-break:keep-all !important;
+background-color: transparent !important;
+
+}
+.mdc-slider__value-indicator >*{
+  font-size: 15px !important;
+  color: rgb(0, 0, 0) !important; /* Couleur du texte */
+  width: 100px; /* Assurer que le texte occupe toute la largeur */
+  text-align: center; /* Centrer le texte */
+  background-color: transparent !important;
+}
+.mdc-slider__value-indicator-text{
+  transform-origin: 8px;
+  width: 100px !important;
+  white-space: nowrap !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

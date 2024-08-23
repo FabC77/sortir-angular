@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environment';
+import { environment } from '../../../environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navbar',

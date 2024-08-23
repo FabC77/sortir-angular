@@ -9,8 +9,10 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AddressInputComponent } from '../address-input/address-input.component';
+import { AddressInputComponent } from '../../shared/address-input/address-input.component';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { TimePickerComponent } from "../../shared/time-picker/time-picker.component";
+import { DurationComponent } from "../../shared/duration/duration.component";
 
 @Component({
   selector: 'app-new-event',
@@ -20,13 +22,13 @@ import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
   imports: [ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
     MatSlideToggleModule, MatCheckboxModule, AddressInputComponent,
-    FormsModule, NgxMatTimepickerModule    
-  ],
+    FormsModule, NgxMatTimepickerModule, TimePickerComponent, DurationComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './new-event.component.scss'
 })
 export class NewEventComponent {
+
 
   eventForm!: FormGroup;
   error = signal('');
@@ -52,6 +54,13 @@ export class NewEventComponent {
     });
   }
 
+    
+  selectedDuration: string = 'Inconnu'; // Propriété pour stocker la valeur
+  onDurationChange(value: number): void {
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+    this.selectedDuration = `${hours}h ${minutes.toString().padStart(2, '0')}m`; // Stocker la valeur dans le format désiré
+  }
   onDateChange(event: any): void {
     const selectedDate = event.value;
     this.updateStartDateTime(selectedDate, this.startDateTime?.getHours(), this.startDateTime?.getMinutes());
