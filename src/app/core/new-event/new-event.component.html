@@ -28,8 +28,8 @@
         <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
       </mat-form-field>
       <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
-      <div>Durée : {{selectedDuration}}</div>
-        <app-duration  (valueChange)="onDurationChange($event)"></app-duration>
+     
+      <app-duration (valueChange)="onDurationChange($event)"></app-duration>
 
     <mat-form-field>
         <mat-label>Fin des inscriptions</mat-label>

@@ -55,8 +55,6 @@
 
 
 
-
-/* Optionnel : Changer la couleur de l'arrière-plan */
 .mat-slider-thumb-label .mat-slider-thumb {
   background-color: #29cc9b !important; /* Exemple avec une couleur Material Design */
 }
@@ -77,6 +75,7 @@ background-color: transparent !important;
   width: 100px !important;
   white-space: nowrap !important;
 }
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

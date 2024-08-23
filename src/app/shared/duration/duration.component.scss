@@ -1,0 +1,17 @@
+/* parent.component.scss ou parent.component.css */
+.slider-container {
+    display: flex;
+    align-items: center; /* Aligne verticalement au centre */
+    gap: 20px; /* Espacement entre le label et le slider */
+  }
+  
+  .label {
+    /* Style optionnel pour le label */
+    margin: 0;
+    font-weight:400;
+  }
+  
+  .slider {
+    flex: 1; /* Permet au slider de prendre tout l'espace disponible */
+  }
+  

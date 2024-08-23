@@ -1,5 +1,15 @@
-
-<mat-slider style="width:100%" min="0" max="720" step="10" showTickMarks discrete [displayWith]="formatLabel">
-    <input  matSliderThumb>
+<!-- parent.component.html -->
+<div class="slider-container">
+  <div class="label">Durée : {{selectedDuration}}</div>
+  <mat-slider
+    class="slider"
+    min="0"
+    max="720"
+    step="10"
+    showTickMarks
+    discrete
+    (change)="onSliderChange($event)"
+    [displayWith]="formatLabel">
+    <input matSliderThumb>
   </mat-slider>
-  
+</div>

@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddressInputComponent } from '../../shared/address-input/address-input.component';
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { TimePickerComponent } from "../../shared/time-picker/time-picker.component";
 import { DurationComponent } from "../../shared/duration/duration.component";
 
@@ -34,7 +34,7 @@ export class NewEventComponent {
   error = signal('');
   numbers: number[] = Array.from({ length: 200 }, (_, i) => i + 1);
   startDateTime!: Date;
-  durationRaw!:Date;
+  durationRaw!: Date;
 
   constructor(private formBuilder: FormBuilder) {
     this.eventForm = this.formBuilder.group({
@@ -48,19 +48,22 @@ export class NewEventComponent {
       latitude: [-1, Validators.required],
       cityName: ['', Validators.required],
       address: ['', Validators.required],
-      duration: {hour: 0, minute: 0},
+      duration: { hours: 0, minutes: 0 },
       deadline: [new Date(), Validators.required],
       maxMembers: [1, Validators.required],
     });
   }
 
-    
-  selectedDuration: string = 'Inconnu'; // Propriété pour stocker la valeur
+
+  // Propriété pour stocker la valeur
   onDurationChange(value: number): void {
-    const hours = Math.floor(value / 60);
-    const minutes = value % 60;
-    this.selectedDuration = `${hours}h ${minutes.toString().padStart(2, '0')}m`; // Stocker la valeur dans le format désiré
+    const h = Math.floor(value / 60);
+    const m = value % 60;
+    this.eventForm.patchValue({ duration: { hours: h, minutes: m } });// Stocker la valeur dans le format désiré
+    console.log("Data onSubmit Parent: " + JSON.stringify(this.eventForm.value));
+  
   }
+
   onDateChange(event: any): void {
     const selectedDate = event.value;
     this.updateStartDateTime(selectedDate, this.startDateTime?.getHours(), this.startDateTime?.getMinutes());
