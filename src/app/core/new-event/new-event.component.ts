@@ -13,6 +13,10 @@ import { AddressInputComponent } from '../../shared/address-input/address-input.
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { TimePickerComponent } from "../../shared/time-picker/time-picker.component";
 import { DurationComponent } from "../../shared/duration/duration.component";
+import { CanComponentDeactivate } from '../../service/can-deactivate.guard';
+import { Observable } from 'rxjs';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-event',
@@ -22,21 +26,21 @@ import { DurationComponent } from "../../shared/duration/duration.component";
   imports: [ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
     MatSlideToggleModule, MatCheckboxModule, AddressInputComponent,
-    FormsModule, NgxMatTimepickerModule, TimePickerComponent, DurationComponent],
+    FormsModule, NgxMatTimepickerModule, TimePickerComponent, DurationComponent, ConfirmDialogComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './new-event.component.scss'
 })
-export class NewEventComponent {
-
-
+export class NewEventComponent implements CanComponentDeactivate {
   eventForm!: FormGroup;
   error = signal('');
   numbers: number[] = Array.from({ length: 200 }, (_, i) => i + 1);
   startDateTime!: Date;
   durationRaw!: Date;
+  minDate: Date;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
+    this.minDate = new Date();
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
       infos: [''],
@@ -53,7 +57,21 @@ export class NewEventComponent {
       maxMembers: [1, Validators.required],
     });
   }
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.eventForm.dirty) {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+          message: 'Vous avez des modifications non enregistrées. Voulez-vous vraiment quitter cette page ?'
+        }
+      });
 
+      return dialogRef.afterClosed(); 
+    }
+    return true;
+  }
+  ngOnDestroy(): void {
+    this.eventForm.reset();
+  }
 
   // Propriété pour stocker la valeur
   onDurationChange(value: number): void {
@@ -61,7 +79,7 @@ export class NewEventComponent {
     const m = value % 60;
     this.eventForm.patchValue({ duration: { hours: h, minutes: m } });// Stocker la valeur dans le format désiré
     console.log("Data onSubmit Parent: " + JSON.stringify(this.eventForm.value));
-  
+
   }
 
   onDateChange(event: any): void {
