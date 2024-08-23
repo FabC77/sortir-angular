@@ -11,12 +11,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddressInputComponent } from '../../shared/address-input/address-input.component';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
-import { TimePickerComponent } from "../../shared/time-picker/time-picker.component";
 import { DurationComponent } from "../../shared/duration/duration.component";
 import { CanComponentDeactivate } from '../../service/can-deactivate.guard';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatButton } from '@angular/material/button';
+import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-new-event',
@@ -25,8 +27,9 @@ import { MatDialog } from '@angular/material/dialog';
 
   imports: [ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
-    MatSlideToggleModule, MatCheckboxModule, AddressInputComponent,
-    FormsModule, NgxMatTimepickerModule, TimePickerComponent, DurationComponent, ConfirmDialogComponent],
+    MatSlideToggleModule, MatButton, MatCheckboxModule, AddressInputComponent,
+    FormsModule, NgxMatTimepickerModule, DurationComponent, 
+    NgxMatTimepickerModule,ConfirmDialogComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './new-event.component.scss'
@@ -34,28 +37,48 @@ import { MatDialog } from '@angular/material/dialog';
 export class NewEventComponent implements CanComponentDeactivate {
   eventForm!: FormGroup;
   error = signal('');
+  errorAddress:string='';
   numbers: number[] = Array.from({ length: 200 }, (_, i) => i + 1);
   startDateTime!: Date;
   durationRaw!: Date;
   minDate: Date;
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private router:Router) {
     this.minDate = new Date();
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
       infos: [''],
       isDraft: [false],
-      startDate: [new Date(), Validators.required],
-      locationId: ['', Validators.required],
+      startDate: [undefined, Validators.required],
+      eventTime: [undefined, Validators.required],
+      locationId: [null, Validators.required],
       locationName: [''],
       longitude: [-1, Validators.required],
       latitude: [-1, Validators.required],
       cityName: ['', Validators.required],
       address: ['', Validators.required],
       duration: { hours: 0, minutes: 0 },
-      deadline: [new Date(), Validators.required],
-      maxMembers: [1, Validators.required],
+      deadline: [undefined, Validators.required],
+      maxMembers: [2],
     });
+  }
+
+  submit() {
+    this.updateErrorMessage();
+
+    if (this.eventForm.valid) {
+  console.log("formulaire:"+JSON.stringify(this.eventForm.value));
+  
+    } else {
+      console.log("formulaire non envoyé"+ JSON.stringify(this.eventForm.value));
+
+      // Afficher les erreurs
+      this.eventForm.markAllAsTouched(); // Marque tous les champs comme "touchés"
+    }
+  
+  }
+  navigateTo(route: string) {
+  this.router.navigate([route])
   }
   canDeactivate(): Observable<boolean> | boolean {
     if (this.eventForm.dirty) {
@@ -83,14 +106,20 @@ export class NewEventComponent implements CanComponentDeactivate {
   }
 
   onDateChange(event: any): void {
+    console.log("in OnDateChange");
+    
     const selectedDate = event.value;
     this.updateStartDateTime(selectedDate, this.startDateTime?.getHours(), this.startDateTime?.getMinutes());
   }
 
-  onTimeChange(event: any): void {
-    const selectedTime = event;
-    const hours = selectedTime.getHours();
-    const minutes = selectedTime.getMinutes();
+  onTimeChange(event: string): void {
+    console.log("in OnTimeChange: " + event);
+    if (!event || event.length < 5) {
+      console.error("Heure invalide : " + event);
+      return;
+    }
+    const hours = parseInt(event.substring(0, 2), 10);
+    const minutes = parseInt(event.substring(3, 5), 10);
     this.updateStartDateTime(this.startDateTime || new Date(), hours, minutes);
   }
   private updateStartDateTime(date: Date, hours: number, minutes: number): void {
@@ -120,13 +149,18 @@ export class NewEventComponent implements CanComponentDeactivate {
   updateErrorMessage() {
     const nameControl = this.eventForm.get('name');
     const deadlineControl = this.eventForm.get('deadline');
+    const addressControl = this.eventForm.get('locationId');
 
     if (nameControl?.hasError('required')) {
       this.error.set('You must enter a name');
     } else if (deadlineControl?.hasError('required')) {
       this.error.set('You must enter a deadline');
+    } else if (addressControl?.hasError('required')) {
+      this.errorAddress="L'adresse doit être sélectionnée";
+
     } else {
       this.error.set('');
+      this.errorAddress=''
     }
   }
 }

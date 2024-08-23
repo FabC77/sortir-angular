@@ -1,68 +1,73 @@
-<p>new-event works!</p>
+<h2>Créer une nouvelle sortie</h2>
 
 
 <div class="form-event" [formGroup]="eventForm">
-    <mat-form-field>
-        <mat-label>Nom de l'événement</mat-label>
-        <input matInput formControlName="name" (blur)="updateErrorMessage()" required />
+  <mat-form-field>
+    <mat-label>Nom de l'événement</mat-label>
+    <input matInput formControlName="name" (blur)="updateErrorMessage()" required />
+  </mat-form-field>
+  <div style="display:flex;">
+    <mat-form-field style="flex:1; padding-right: 10px;">
+      <mat-label>Date de l'événement</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="startDatePicker" (dateChange)="onDateChange($event)"
+        placeholder="DD/MM/YYYY" formControlName="startDate" required>
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
     </mat-form-field>
-    <div style="display:flex;">
-        <mat-form-field style="flex:1; padding-right: 10px;">
-            <mat-label>Date de l'événement</mat-label>
-            <input matInput 
-            [min]="minDate"
-                       [matDatepicker]="startDatePicker" 
-            (dateChange)="onDateChange($event)" 
-            placeholder="DD/MM/YYYY" 
-            required>
-            <mat-hint>DD/MM/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
-              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #startDatePicker></mat-datepicker>
-          </mat-form-field>
-          
-          <mat-form-field style="flex:1">
-            <mat-label>Heure de l'événement</mat-label>
-            <input matInput 
-            [ngxMatTimepicker]="pickerB"[format]="24" (timeSet)="onTimeChange($event)" placeholder="14:00" required readonly>
-            <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
-          </mat-form-field>
-          <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
-        </div>
-          <app-duration (valueChange)="onDurationChange($event)"></app-duration>
-          <app-address-input (addressSelected)="onAddressSelected($event)" />
-          <br />
-          <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea style="min-height: 170px;" matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
+    <mat-form-field style="flex:1">
+      <mat-label>Heure de l'événement</mat-label>
+      <input matInput [ngxMatTimepicker]="pickerB" [format]="24" formControlName="eventTime" placeholder="14:00"
+        required readonly>
+      <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
     </mat-form-field>
-   
-    
-      <div style="display:flex;">
-    
-    <mat-form-field style="flex:1;padding-right:10px;">
-        <mat-label>Nombre maximal de participants (vous inclus)</mat-label>
-        <mat-select formControlName="maxMembers">
-            @for (num of numbers; track $index) {
-            <mat-option [value]="num">
-                {{ num }}
-            </mat-option>
-            }
+    <ngx-mat-timepicker #pickerB (timeSet)="onTimeChange($event)"></ngx-mat-timepicker>
+  </div>
+  <app-duration (valueChange)="onDurationChange($event)"></app-duration>
+  <app-address-input (addressSelected)="onAddressSelected($event)" />
+  @if (errorAddress.length > 0) {
+  <div>
+    <p>{{errorAddress}}</p>
+    <p>test</p>
+  </div>
+  }
+  <br />
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea style="min-height: 170px;" matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
+  </mat-form-field>
 
-        </mat-select>
+  <div style="display:flex;">
+
+    <mat-form-field style="flex:1;padding-right:10px;">
+      <mat-label>Nombre maximal de participants (vous inclus)</mat-label>
+      <mat-select formControlName="maxMembers">
+        @for (num of numbers; track $index) {
+        <mat-option [value]="num">
+          {{ num }}
+        </mat-option>
+        }
+
+      </mat-select>
     </mat-form-field>
     <mat-form-field style="flex:0.6; ">
-        <mat-label>Fin des inscriptions</mat-label>
-        <input matInput 
-        [min]="minDate"
-        [matDatepicker]="deadlinePicker" formControlName="deadline">
-        <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="deadlinePicker">
-            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #deadlinePicker></mat-datepicker>
+      <mat-label>Fin des inscriptions</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="deadlinePicker" formControlName="deadline">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="deadlinePicker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #deadlinePicker></mat-datepicker>
     </mat-form-field>
-    </div>
-    <mat-checkbox style="margin-left: 100%;" (change)="updateCheckbox($event.checked)">Enregistrer en tant que brouillon</mat-checkbox>
+  </div>
+  <br />
+  <mat-checkbox style="margin-left: 110%;" (change)="updateCheckbox($event.checked)">Enregistrer en tant que
+    brouillon</mat-checkbox>
+  <div style="display:flex; gap: 20px; flex-direction: row-reverse;">
+    <button mat-stroked-button (click)="submit()">Créer la sortie</button>
+    <button mat-button (click)="navigateTo('/')">Annuler</button>
+  </div>
+
 </div>
