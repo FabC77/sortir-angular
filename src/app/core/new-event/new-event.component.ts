@@ -18,6 +18,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { stringify } from 'querystring';
+import { EventService } from '../../service/event.service';
 
 
 @Component({
@@ -42,8 +43,9 @@ export class NewEventComponent implements CanComponentDeactivate {
   startDateTime!: Date;
   durationRaw!: Date;
   minDate: Date;
+  isSubmitting = false; 
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private router: Router, private service: EventService) {
     this.minDate = new Date();
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -66,16 +68,27 @@ export class NewEventComponent implements CanComponentDeactivate {
   submit() {
 
     if (this.eventForm.valid) {
+this.isSubmitting=true;
       console.log("formulaire:" + JSON.stringify(this.eventForm.value));
+      this.service.createEvent(this.eventForm).subscribe({
+        next:
+          (data) => {
+            this.router.navigate([`/event/${data.id}`]);
+          },
+        error: (err) => {
+          this.error = err.message;
+        }
+      });
+      this.eventForm.reset();
+      this.isSubmitting=false;
 
     } else {
       console.log("formulaire non envoyé" + JSON.stringify(this.eventForm.value));
-
-      // Afficher les erreurs
-      this.eventForm.markAllAsTouched(); // Marque tous les champs comme "touchés"
-      this.updateErrorMessage();
+      this.eventForm.markAllAsTouched();
+      this.isSubmitting=false;
 
     }
+    this.updateErrorMessage();
 
   }
   navigateTo(route: string) {
@@ -107,7 +120,7 @@ export class NewEventComponent implements CanComponentDeactivate {
   }
 
   onDateChange(event: any): void {
-    console.log("in OnDateChange"+event);
+    console.log("in OnDateChange" + event.value);
 
     const selectedDate = event.value;
     this.updateStartDateTime(selectedDate, this.startDateTime?.getHours() ?? 0, this.startDateTime?.getMinutes() ?? 0);

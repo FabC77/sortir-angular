@@ -9,13 +9,14 @@
   <div style="display:flex;">
     <mat-form-field style="flex:1; padding-right: 10px;">
       <mat-label>Date de l'événement</mat-label>
-      <input matInput [min]="minDate" formControlName="startDate" [matDatepicker]="startDatePicker"
+      <input matInput [min]="minDate"  [matDatepicker]="startDatePicker" 
+      (dateChange)="onDateChange($event)"
         placeholder="DD/MM/YYYY"  required>
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
-      <mat-datepicker #startDatePicker  (dateChange)="onDateChange($event)"></mat-datepicker>
+      <mat-datepicker #startDatePicker  ></mat-datepicker>
     </mat-form-field>
     <mat-form-field style="flex:1">
       <mat-label>Heure de l'événement</mat-label>
@@ -28,7 +29,7 @@
   <app-duration (valueChange)="onDurationChange($event)"></app-duration>
   <app-address-input (addressSelected)="onAddressSelected($event)"></app-address-input>
  @if(errorAddress.length > 0){
-  <div><p>{{errorAddress}}</p></div>
+  <div class="errorMessage"><p>{{errorAddress}}</p></div>
  }
   <br />
   <mat-form-field>
@@ -63,7 +64,7 @@
   <mat-checkbox style="margin-left: 110%;" (change)="updateCheckbox($event.checked)">Enregistrer en tant que
     brouillon</mat-checkbox>
   <div style="display:flex; gap: 20px; flex-direction: row-reverse;">
-    <button mat-stroked-button (click)="submit()">Créer la sortie</button>
+    <button mat-stroked-button (click)="submit()" [disabled]="isSubmitting">Créer la sortie</button>
     <button mat-button (click)="navigateTo('/')">Annuler</button>
   </div>
 
