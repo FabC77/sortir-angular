@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path:'events',component: EventsComponent , canActivate:[authGuard]},
     {path:'login',component: LoginComponent},
     {path:'not-found',component: NotFoundComponent},
-    {path:`/event/:id`,
+    {path:`event/:id`,
         component: EventPageComponent},
     {path:'events/new',component: NewEventComponent, canDeactivate:[canDeactivateGuard] },
 

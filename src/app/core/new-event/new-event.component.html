@@ -11,7 +11,7 @@
       <mat-label>Date de l'événement</mat-label>
       <input matInput [min]="minDate"  [matDatepicker]="startDatePicker" 
       (dateChange)="onDateChange($event)"
-        placeholder="DD/MM/YYYY"  required>
+          required>
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -21,7 +21,7 @@
     <mat-form-field style="flex:1">
       <mat-label>Heure de l'événement</mat-label>
       <input matInput [ngxMatTimepicker]="pickerB" [format]="24" formControlName="eventTime" placeholder="14:00"
-        required readonly>
+       placeholder="" required readonly>
       <mat-icon matSuffix (click)="pickerB.open()">watch_later</mat-icon>
     </mat-form-field>
     <ngx-mat-timepicker #pickerB (timeSet)="onTimeChange($event)"></ngx-mat-timepicker>

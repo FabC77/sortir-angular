@@ -13,7 +13,7 @@ export class EventService {
 
   }
 
-  createEvent(form: any): Observable<{ id: number }> {
+  createEvent(form: any): Observable<any> {
     return this.http.post<{ id: number }>(`${environment.baseUrl}/event/create`, form);
   };
 }

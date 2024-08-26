@@ -55,6 +55,7 @@ export class NewEventComponent implements CanComponentDeactivate {
       eventTime: [undefined, Validators.required],
       locationId: ['', Validators.required],
       locationName: [''],
+      locationNotNamed: [''],
       longitude: [-1, Validators.required],
       latitude: [-1, Validators.required],
       cityName: ['', Validators.required],
@@ -62,25 +63,34 @@ export class NewEventComponent implements CanComponentDeactivate {
       duration: { hours: 0, minutes: 0 },
       deadline: [undefined, Validators.required],
       maxMembers: [2],
+      zipCode:['',Validators.required],
     });
   }
 
   submit() {
 
     if (this.eventForm.valid) {
+    
 this.isSubmitting=true;
       console.log("formulaire:" + JSON.stringify(this.eventForm.value));
-      this.service.createEvent(this.eventForm).subscribe({
+      this.service.createEvent(this.eventForm.value).subscribe({
         next:
           (data) => {
-            this.router.navigate([`/event/${data.id}`]);
+            console.log("Réponse du serveur:", data);
+
+            this.router.navigate([`event/${data.id}`]);
           },
         error: (err) => {
           this.error = err.message;
+          console.error("Erreur lors de la soumission:", err);
+
+        },
+        complete: () => {
+          this.isSubmitting=false;
+          this.eventForm.reset();
         }
       });
-      this.eventForm.reset();
-      this.isSubmitting=false;
+   
 
     } else {
       console.log("formulaire non envoyé" + JSON.stringify(this.eventForm.value));
@@ -91,6 +101,7 @@ this.isSubmitting=true;
     this.updateErrorMessage();
 
   }
+
   navigateTo(route: string) {
     this.router.navigate([route])
   }
@@ -158,7 +169,9 @@ this.isSubmitting=true;
       locationName: location.properties.name,
       longitude: location.properties.lon,
       latitude: location.properties.lat,
-      cityName: location.properties.city
+      cityName: location.properties.city,
+      zipCode: location.properties.postcode,
+      locationNotNamed: location.properties.address_line1,
     });
   }
   updateErrorMessage() {
