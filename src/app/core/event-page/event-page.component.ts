@@ -7,6 +7,7 @@ import { MatButton } from '@angular/material/button';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { EventStatusService } from '../../service/event-status.service';
 import { EventStatus } from '../model/eventstatus.enum';
+import { EventModel } from '../model/eventModel';
 
 @Component({
   selector: 'app-event-page',
@@ -25,7 +26,7 @@ throw new Error('Method not implemented.');
 register() {
 throw new Error('Method not implemented.');
 }
-  event:any;
+  event!:EventModel;
   form:Object={"reason": "parce que"}
 
   constructor(private route: ActivatedRoute, private http:HttpClient,
@@ -37,8 +38,8 @@ throw new Error('Method not implemented.');
   const eventId = this.route.snapshot.paramMap.get('id');
   console.log("Event ID: ", eventId);
 
-  this.http.get(`${environment.baseUrl}/event/${eventId}`).subscribe({
-    next: (data)=> {
+  this.http.get<EventModel>(`${environment.baseUrl}/event/${eventId}`).subscribe({
+    next: (data:EventModel)=> {
       console.log("Data received: ", data);
       this.event = data;
     },

@@ -1,13 +1,15 @@
 <h1>Sortir.com</h1>
 <br />
-<h2>bloc mises à jour conditionnel</h2>
+<p>bloc mises à jour conditionnel</p>
 <nav>
+<div style="display: flex; flex-direction: column; align-items:flex-start;">
+   <button mat-button (click)="navigateTo('/home')">Accueil</button>
+ 
+   <button mat-button (click)="navigateTo('/events')">Mes sorties</button>
+   <button mat-button (click)="navigateTo('/events/new')">Proposer une sortie</button>
 
-   <button (click)="navigateTo('/home')">Accueil</button>
-   <br />
-   <button (click)="navigateTo('/events')">Mes sorties</button>
-   <button (click)="navigateTo('/events/new')">New event (temp)</button>
-
+</div>
+  
 
 
    <br />
@@ -18,8 +20,8 @@
          <br />
          <p>insérer test condition pour boutons</p>
 
-         <button (click)="navigateTo('/login')">Se connecter</button>
-         <button (click)="logout()">Se déconnecter</button>
+         <button mat-button (click)="navigateTo('/login')">Se connecter</button>
+         <button mat-button (click)="logout()">Se déconnecter</button>
 
       </div>
    </div>

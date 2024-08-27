@@ -10,7 +10,7 @@
         </div>
     </div>
     @if(event.status==="CANCELLED"){ <p>Motif de l'annulation : {{event.reason}}</p>}
-    <h4>{{event.startDate | date:'EEEE dd MMM YYYY':'LOCALE_ID' | titlecase }} à {{event.startDate |
+    <h4>{{event.startDate | date:'EEEE dd MMMM YYYY':'LOCALE_ID' | titlecase }} à {{event.startDate |
         date:'H'}}h{{event.startDate | date:'mm'}}</h4>
     @if (isLocationNotNamed()) {
     <p>Lieu : {{event.locationName}}</p>
@@ -30,13 +30,13 @@
         (COMPLET)
         }
     </p>
-    <p>Fin des inscriptions: {{event.deadline | date: 'EEEE dd MMM YYYY'|titlecase }}  à {{event.deadline |
+    <p>Fin des inscriptions: {{event.deadline | date: 'EEEE dd MMMM YYYY'|titlecase }}  à {{event.deadline |
         date:'H'}}h{{event.deadline | date:'mm'}}</p>
     @if ((event.maxMembers - event.currentMembers) < 4 && (event.maxMembers - event.currentMembers) !=0 ) { <p>Places
         disponibles : {{ event.maxMembers - event.currentMembers }}</p>
         }
         <div>
-            @if(event.status!=='FINISHED' || event.status!=='ARCHIVED' || event.status!=='IN_PROGRESS'){
+            @if(event.status!=='FINISHED' && event.status!=='ARCHIVED' && event.status!=='IN_PROGRESS'){
 
             @if(event.isCreator ==false){
             <button mat-button [disabled]="event.currentMembers == event.maxMembers ||   event.status==='CLOSED'"

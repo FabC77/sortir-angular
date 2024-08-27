@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [MatButton,MatButtonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
