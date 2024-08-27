@@ -1,24 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environment';
 import { AuthService } from '../../service/auth.service';
 import { MatButton } from '@angular/material/button';
+import { DatePipe, TitleCasePipe } from '@angular/common';
+import { EventStatusService } from '../../service/event-status.service';
+import { EventStatus } from '../model/eventstatus.enum';
 
 @Component({
   selector: 'app-event-page',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, DatePipe, TitleCasePipe],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.scss'
 })
 export class EventPageComponent {
+leaveEvent() {
+throw new Error('Method not implemented.');
+}
+updateEvent() {
+throw new Error('Method not implemented.');
+}
+register() {
+throw new Error('Method not implemented.');
+}
   event:any;
   form:Object={"reason": "parce que"}
 
-  constructor(private route: ActivatedRoute, private http:HttpClient) {
-
-  }
+  constructor(private route: ActivatedRoute, private http:HttpClient,
+    private enumService: EventStatusService
+  ) {  }
   
   ngOnInit():void {
     console.log("ngOnInit called");
@@ -46,5 +58,17 @@ export class EventPageComponent {
             }
         });
       }
-
+      isLocationNotNamed():boolean {
+        const nameWords = this.event.name.toLowerCase().split(' ');
+        const addressLower = this.event.address.toLowerCase();
+        for (const word of nameWords) {
+          if (!addressLower.includes(word)) {
+            return false;
+          }
+        }
+        return true;
+      }
+      getConvertedStatus(enumRaw: EventStatus): string {
+        return this.enumService.getStatusTranslation(enumRaw);
+        }
   }

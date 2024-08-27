@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "sortir-angular": {
+      "i18n": {
+        "sourceLocale":"fr-FR"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:guard": { "implements": ["CanActivate"] } ,
@@ -18,11 +21,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize":["fr-FR"],
             "outputPath": "dist/sortir-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -44,6 +49,7 @@
             "ssr": {
               "entry": "server.ts"
             }
+          
           },
           "configurations": {
             "production": {
@@ -89,7 +95,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",

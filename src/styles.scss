@@ -16,7 +16,7 @@
   
   .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 40px;
   }
 
   nav {
@@ -52,7 +52,11 @@
 .form-event >*{
   width: 100%;
 }
+.event-page{
+  display: flex;
+  flex-direction: column;
 
+}
 
 
 .mat-slider-thumb-label .mat-slider-thumb {
