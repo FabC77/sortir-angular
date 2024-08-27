@@ -48,17 +48,17 @@ export class AuthService {
     });
   }
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('id_token');
+    return !!localStorage.getItem('authToken');
   }
   logout() {
-    const token = localStorage.getItem('id_token') || sessionStorage.getItem('id_token');
+    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
   
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   
       this.http.post<any>(`${environment.baseUrl}/auth/logout`, {}, { headers }).subscribe({
         next: () => {
-          localStorage.removeItem('id_token');
+          localStorage.removeItem('authToken');
           localStorage.removeItem('fullName');
           this.router.navigate(['/login']);
         },
