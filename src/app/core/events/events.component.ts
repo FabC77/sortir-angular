@@ -3,20 +3,21 @@ import { MatTableModule } from '@angular/material/table';
 import { EventService } from '../../service/event.service';
 import { Router } from '@angular/router';
 import { UserEvent } from '../model/user-event';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, DatePipe],
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
-openPage(_t54: any) {
-throw new Error('Method not implemented.');
-}
+  openPage(_t54: any) {
+    throw new Error('Method not implemented.');
+  }
   events: UserEvent[] = [];
-  displayedColumns: string[] = ['id','Nom de la sortie', 'Date de la sortie', 'Organisateur-rice','Participants', 'Deadline'];
+  displayedColumns: string[] = [ 'name', 'startDate', 'organizerName', 'currentMembers', 'deadline'];
 
   constructor(private route: Router, private eventService: EventService) { }
 
@@ -25,7 +26,7 @@ throw new Error('Method not implemented.');
       {
         next: (data: UserEvent[]) => {
           console.log("data received : " + JSON.stringify(data));
-          
+
           this.events = data;
         },
         error: (err) => {

@@ -19,7 +19,7 @@ export class EventService {
   };
 
   getEvents():Observable<UserEvent[]>{
-   return this.http.get<UserEvent[]>(`${environment.baseUrl}/events}`);
+   return this.http.get<UserEvent[]>(`${environment.baseUrl}/event/user-events`);
   }
 
 }
