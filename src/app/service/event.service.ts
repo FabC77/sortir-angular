@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environment';
 import { UserEvent } from '../core/model/user-event';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: Router, private authService: AuthService) {
 
 
   }
@@ -19,7 +21,16 @@ export class EventService {
   };
 
   getEvents():Observable<UserEvent[]>{
-   return this.http.get<UserEvent[]>(`${environment.baseUrl}/event/user-events`);
+   return this.http.get<UserEvent[]>(`${environment.baseUrl}/event/user-events`)
+   .pipe(
+    catchError((err) => {
+      if (err.status === 403) {
+     this.authService.expired();
+      }
+      // Renvoyer l'erreur pour que le composant puisse la gérer aussi
+      return throwError(() => err);
+    })
+  );
   }
 
 }

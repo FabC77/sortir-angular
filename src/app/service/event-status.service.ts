@@ -10,10 +10,10 @@ export class EventStatusService {
   private statusTranslations: { [key in EventStatus]: string } = {
     [EventStatus.IN_PROGRESS]: 'En cours',
     [EventStatus.DRAFT]: 'Brouillon',
-    [EventStatus.CLOSED]: 'Clôturé',
+    [EventStatus.CLOSED]: 'Complet',
     [EventStatus.CANCELLED]: 'Annulé',
     [EventStatus.FINISHED]: 'Terminé',
-    [EventStatus.OPEN]: 'Ouvert',
+    [EventStatus.OPEN]: 'Inscriptions ouvertes',
     [EventStatus.ARCHIVED]: 'Archivé'
   };
 

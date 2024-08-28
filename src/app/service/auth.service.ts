@@ -70,4 +70,9 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
   }
+  expired(){
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('fullName');
+    this.router.navigate(['/login']);
+  }
 }

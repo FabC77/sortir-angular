@@ -4,6 +4,8 @@ import { EventService } from '../../service/event.service';
 import { Router } from '@angular/router';
 import { UserEvent } from '../model/user-event';
 import { DatePipe } from '@angular/common';
+import { EventStatusService } from '../../service/event-status.service';
+import { EventStatus } from '../model/eventstatus.enum';
 
 @Component({
   selector: 'app-events',
@@ -13,13 +15,16 @@ import { DatePipe } from '@angular/common';
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
-  openPage(_t54: any) {
-    throw new Error('Method not implemented.');
+isLoading: boolean=true;
+  openPage(row: any) {
+   this.route.navigate(['event/'+row.id]);
   }
   events: UserEvent[] = [];
-  displayedColumns: string[] = [ 'name', 'startDate', 'organizerName', 'currentMembers', 'deadline'];
+  displayedColumns: string[] = [ 'name', 'startDate', 'organizerName', 'currentMembers', 'status'];
 
-  constructor(private route: Router, private eventService: EventService) { }
+  constructor(private route: Router, private eventService: EventService
+    , private enumService: EventStatusService
+  ) { }
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(
@@ -28,6 +33,7 @@ export class EventsComponent {
           console.log("data received : " + JSON.stringify(data));
 
           this.events = data;
+          this.isLoading=false;
         },
         error: (err) => {
           console.log("error : ", err);
@@ -37,4 +43,7 @@ export class EventsComponent {
     )
 
   }
+  getConvertedStatus(enumRaw: EventStatus): string {
+    return this.enumService.getStatusTranslation(enumRaw);
+    }
 }
