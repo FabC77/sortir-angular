@@ -15,14 +15,20 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 export class NavbarComponent {
   private baseUrl: string = environment.baseUrl;
   fullName: string = '';
+isLoggedIn: boolean = false;
 
   constructor(private router: Router, private http: HttpClient, private authService:AuthService) { }
+
 
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
   ngOnInit() {
-    this.fullName = localStorage.getItem('fullName') || '';
+    this.authService.loggedIn$.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+      this.fullName = localStorage.getItem('fullName') || '';
+    });
+
   }
 
 

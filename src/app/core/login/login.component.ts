@@ -5,11 +5,15 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environment';
 import { AuthService } from '../../service/auth.service';
 import Credentials from '../model/credentials';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatInput,
+    MatCheckbox, MatInputModule, MatButton,MatInputModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

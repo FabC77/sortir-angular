@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Credentials from '../core/model/credentials';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environment';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -10,6 +10,8 @@ import jwtDecode from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  public loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -21,11 +23,15 @@ export class AuthService {
         .subscribe({
           next: (data) => {
             if (data && data.token) {
+                  this.loggedInSubject.next(true);
+
               localStorage.setItem('authToken', data.token);
               localStorage.setItem('fullName', data.fullName);
               console.log('Token stored successfully:', data.token);
               subscriber.next(data);
               subscriber.complete();
+              this.loggedInSubject.next(true);
+
             } else {
               subscriber.error('Token is missing in the response');
 
@@ -62,6 +68,8 @@ export class AuthService {
           localStorage.removeItem('authToken');
           localStorage.removeItem('fullName');
           this.router.navigate(['/login']);
+          this.loggedInSubject.next(false);
+
         },
         error: (err) => {
           console.error('Error during logout:', err);

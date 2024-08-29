@@ -1,7 +1,7 @@
 <nav>
    <div class="navbar-topblock">
-      <h1>LOGO</h1>
-      <p>bloc mises à jour conditionnel</p>
+      <h1 style="align-self: center; color:white;">LOGO</h1>
+      <br/>
       <button mat-button (click)="navigateTo('/home')">Accueil</button>
 
       <button mat-button (click)="navigateTo('/events')">Mes sorties</button>
@@ -12,13 +12,18 @@
 
    <div class="navbar-loginblock">
       <div class="user-navbar">
-         <p>insérer composant user profile (photo+ nom + 'mon profile')</p>
-         <h2>{{fullName}}</h2>
-         <br />
-         <p>insérer test condition pour boutons</p>
+         @if(isLoggedIn){
+                  <p>{{fullName}}</p>
+               
+         }
+         
 
-         <button mat-button (click)="navigateTo('/login')">Se connecter</button>
-         <button mat-button (click)="logout()">Se déconnecter</button>
+         @if(!isLoggedIn){
+            <button mat-button (click)="navigateTo('/login')">Se connecter</button>
+
+         }        @else {
+            <button mat-button (click)="logout()">Se déconnecter</button>
+         }
 
       </div>
    </div>

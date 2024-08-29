@@ -1,21 +1,33 @@
-<p>LOGO SORTIR</p>
+<div class="login-container" [formGroup]="loginForm">
+    <h2 style="align-self: center;">LOGO</h2>
+    <br />
+    <div class="login-form">
+        <div>
+            <mat-form-field>
+                <mat-label>Identifiant</mat-label>
+                <input matInput placeholder="" formControlName="username">
+            </mat-form-field>
 
-<div class="container" [formGroup]="loginForm">
-    <div>
-        <label for="username">Identifiant : </label>
-        <input type="text" id="username" formControlName="username" />
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" placeholder="" formControlName="password">
+            </mat-form-field>
+
+        </div>
     </div>
-    <div>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" formControlName="password" />
+    <div style="display:flex;  gap: 20px; ">
+        <p> <mat-checkbox id="isRemembered" formControlName="isRemembered"> Se souvenir de moi</mat-checkbox> </p>
+        <button  mat-raised-button (click)="connect()" [disabled]="!loginForm.valid">Connexion</button>
+    
     </div>
-    <button type="button" (click)="connect()" [disabled]="!loginForm.valid">Connexion</button>
+
     @if (error) {
     <div class="alert alert-danger">
         {{error}}
     </div>
     }
 
-    <p> <input type="checkbox" id="isRemembered" formControlName="isRemembered"> Se souvenir de moi</p>
-    <p> TODO: mot de passe oublié</p>
+
 </div>
