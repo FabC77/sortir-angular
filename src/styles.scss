@@ -15,36 +15,39 @@ nav {
 }
 
 app-navbar {
-  //width: 200px;
   width: 17%;
   min-width: 170px;
   max-width: 240px;
-  justify-content: space-between;
   padding: 10px;
   background-color: pink;
   display: flex;
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-
-  /* ou la largeur que vous souhaitez pour la navbar */
+  justify-content: space-evenly;
 }
 
-.navbar-topblock{
-
+.navbar-topblock {
+ 
+  display: flex;
+  height: 45vh;
+  flex-direction: column;
+  justify-content: flex-start;  
+  background-color: rgb(189, 189, 231);
+  
 }
+
 .navbar-loginblock {
-  /* Aligne tout le contenu à la fin du conteneur */
-  // height: 100vh;
-  display: block;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 45vh;
+  padding: 10px;
 }
 
 .user-navbar {
-  //position:relative;
-  //bottom:0;
-  height: 270px;
-  
+  display: flex;
+  flex-direction: column;
   background-color: yellow;
 }
 

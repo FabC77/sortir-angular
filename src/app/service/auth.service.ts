@@ -4,6 +4,7 @@ import Credentials from '../core/model/credentials';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -75,4 +76,19 @@ export class AuthService {
     localStorage.removeItem('fullName');
     this.router.navigate(['/login']);
   }
+
+checkTokenValidity() {
+  const jwtDecode = require('jwt-decode');
+
+  const token = localStorage.getItem('authToken');
+  if (token) {
+      const decodedToken = jwtDecode(token) as any;
+      const now = new Date().getTime() / 1000;
+      if (decodedToken.exp < now) {
+          // Token has expired
+          localStorage.removeItem('authToken');
+          this.router.navigate(['/login']);
+      }
+  }
+}
 }

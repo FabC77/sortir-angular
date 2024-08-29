@@ -7,13 +7,14 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { authInterceptor } from './service/auth.interceptor';
+import { validityInterceptor } from './service/validity.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: 
   [provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideClientHydration(), 
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])), 
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor, validityInterceptor])), 
     provideAnimationsAsync(),
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     {provide: LOCALE_ID, useValue: 'fr-FR'},

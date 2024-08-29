@@ -12,13 +12,16 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:'/home',pathMatch:'full'},
+
     {path:'home', component: HomeComponent,},
     {path:'profile',component: ProfileComponent, canActivate:[authGuard]},
     {path:'events',component: EventsComponent , canActivate:[authGuard]},
     {path:'login',component: LoginComponent},
-    {path:'not-found',component: NotFoundComponent},
+
     {path:`event/:id`,
         component: EventPageComponent, canActivate:[authGuard]},
-    {path:'events/new',component: NewEventComponent, canDeactivate:[canDeactivateGuard] },
+    {path:'events/new',component: NewEventComponent,canActivate:[authGuard], canDeactivate:[canDeactivateGuard] },
+    {path:'not-found',component: NotFoundComponent},
+    { path: '**', redirectTo: '/not-found' }
 
 ];

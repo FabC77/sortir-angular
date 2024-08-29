@@ -11,7 +11,9 @@ import { AuthService } from './auth.service';
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private route: Router, private authService: AuthService) {
+  constructor(private http: HttpClient, 
+    private route: Router, 
+    private authService: AuthService) {
 
 
   }
