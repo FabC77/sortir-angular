@@ -4,11 +4,13 @@ import { environment } from '../../../environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MenuButtonComponent } from "../../shared/menu-button/menu-button.component";
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatButton,MatButtonModule],
+  imports: [MatButton, MatButtonModule, MenuButtonComponent, NgOptimizedImage],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -16,6 +18,8 @@ export class NavbarComponent {
   private baseUrl: string = environment.baseUrl;
   fullName: string = '';
 isLoggedIn: boolean = false;
+profilePicture: any='';
+
 
   constructor(private router: Router, private http: HttpClient, private authService:AuthService) { }
 
@@ -27,6 +31,7 @@ isLoggedIn: boolean = false;
     this.authService.loggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
       this.fullName = localStorage.getItem('fullName') || '';
+      this.profilePicture = localStorage.getItem('profilePicture') || '';
     });
 
   }

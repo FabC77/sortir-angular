@@ -27,6 +27,7 @@ export class AuthService {
 
               localStorage.setItem('authToken', data.token);
               localStorage.setItem('fullName', data.fullName);
+              localStorage.setItem('profilePicture', data.profilePicture);
               console.log('Token stored successfully:', data.token);
               subscriber.next(data);
               subscriber.complete();
@@ -67,6 +68,7 @@ export class AuthService {
         next: () => {
           localStorage.removeItem('authToken');
           localStorage.removeItem('fullName');
+          localStorage.removeItem('profilePicture');
           this.router.navigate(['/login']);
           this.loggedInSubject.next(false);
 

@@ -1,20 +1,28 @@
 <nav>
    <div class="navbar-topblock">
+    
       <h1 style="align-self: center; color:white;">LOGO</h1>
       <br/>
-      <button mat-button (click)="navigateTo('/home')">Accueil</button>
-
-      <button mat-button (click)="navigateTo('/events')">Mes sorties</button>
-      <button mat-button (click)="navigateTo('/events/new')">Proposer une sortie</button>
-
+      <app-menu-button label="Accueil" link="/home" ></app-menu-button>
+      <app-menu-button label="Mes sorties" link="/events" ></app-menu-button>
+      <app-menu-button label="Proposer une sortie" link="/events/new" ></app-menu-button>
    </div>
 
 
    <div class="navbar-loginblock">
       <div class="user-navbar">
          @if(isLoggedIn){
-                  <p>{{fullName}}</p>
-               
+            <div style="display: flex; gap: 20px; align-items: center;">
+            @if(profilePicture.includes('')){
+               <img ngSrc="assets/icons/default-profil-icon.png" 
+               width="60px" height="60px"
+               alt="default profile icon" 
+            
+               >
+            }@else {}
+
+                  {{fullName}}
+               </div>
          }
          
 
@@ -22,7 +30,7 @@
             <button mat-button (click)="navigateTo('/login')">Se connecter</button>
 
          }        @else {
-            <button mat-button (click)="logout()">Se déconnecter</button>
+            <button mat-button (click)="logout()" style="color:rgb(138, 138, 138) !important">Se déconnecter</button>
          }
 
       </div>
