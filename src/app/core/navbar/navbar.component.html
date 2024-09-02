@@ -1,36 +1,36 @@
 <nav>
    <div class="navbar-topblock">
-    
+
       <h1 style="align-self: center; color:white;">LOGO</h1>
-      <br/>
-      <app-menu-button label="Accueil" link="/home" ></app-menu-button>
-      <app-menu-button label="Mes sorties" link="/events" ></app-menu-button>
-      <app-menu-button label="Proposer une sortie" link="/events/new" ></app-menu-button>
+      <br />
+      <app-menu-button label="Accueil" link="/home"></app-menu-button>
+      <app-menu-button label="Mes sorties" link="/events"></app-menu-button>
+      <app-menu-button label="Proposer une sortie" link="/events/new"></app-menu-button>
    </div>
 
 
    <div class="navbar-loginblock">
       <div class="user-navbar">
          @if(isLoggedIn){
-            <div style="display: flex; gap: 20px; align-items: center;">
+         <div class="profile-container">
             @if(profilePicture.includes('')){
-               <img ngSrc="assets/icons/default-profil-icon.png" 
-               width="60px" height="60px"
-               alt="default profile icon" 
-            
-               >
+            <div        style="justify-content: center;">
+               <img 
+               src="assets/icons/default-profil-icon.png" width="50px" height="50px" alt="default profile icon">
+            </div>
             }@else {}
-
-                  {{fullName}}
-               </div>
+            <div class="profileName">
+               {{fullName}}
+            </div>
+         </div>
          }
-         
+
 
          @if(!isLoggedIn){
-            <button mat-button (click)="navigateTo('/login')">Se connecter</button>
+         <button mat-button (click)="navigateTo('/login')">Se connecter</button>
 
-         }        @else {
-            <button mat-button (click)="logout()" style="color:rgb(138, 138, 138) !important">Se déconnecter</button>
+         } @else {
+         <button mat-button (click)="logout()" style="color:rgb(138, 138, 138) !important">Se déconnecter</button>
          }
 
       </div>
