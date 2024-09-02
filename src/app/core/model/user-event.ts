@@ -4,7 +4,7 @@ export interface UserEvent {
     id:number;
     status: EventStatus;
     organizerName: string;
-    isOrganizer: boolean;
+    organizer: boolean;
     name: string;
     reason: string;
     campusId:number;

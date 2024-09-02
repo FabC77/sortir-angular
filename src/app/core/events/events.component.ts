@@ -15,12 +15,12 @@ import { EventStatus } from '../model/eventstatus.enum';
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
-isLoading: boolean=true;
-  openPage(row: any) {
-   this.route.navigate(['event/'+row.id]);
-  }
+  isLoading: boolean = true;
+
   events: UserEvent[] = [];
-  displayedColumns: string[] = [ 'name', 'startDate', 'organizerName', 'currentMembers', 'status'];
+  createdEvents: UserEvent[] = [];
+  nextEventsColumn: string[] = ['name', 'startDate', 'organizerName', 'currentMembers', 'status'];
+  displayedColumns: string[] = ['name', 'startDate', 'currentMembers', 'status'];
 
   constructor(private route: Router, private eventService: EventService
     , private enumService: EventStatusService
@@ -31,9 +31,9 @@ isLoading: boolean=true;
       {
         next: (data: UserEvent[]) => {
           console.log("data received : " + JSON.stringify(data));
+          this.sortEvents(data);
 
-          this.events = data;
-          this.isLoading=false;
+          this.isLoading = false;
         },
         error: (err) => {
           console.log("error : ", err);
@@ -43,7 +43,21 @@ isLoading: boolean=true;
     )
 
   }
+  openPage(row: any) {
+    this.route.navigate(['event/' + row.id]);
+  }
+
   getConvertedStatus(enumRaw: EventStatus): string {
     return this.enumService.getStatusTranslation(enumRaw);
-    }
+  }
+
+  sortEvents(data: UserEvent[]): void {
+    this.createdEvents = data.filter(element => element.organizer === true);
+  this.events = data.filter(element => element.organizer !== true);
+
+  console.log("APRES TRANSFERT : createdEvents empty? :  ",this.createdEvents.length>0);
+  
+  }
 }
+
+
