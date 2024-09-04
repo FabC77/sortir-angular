@@ -1,4 +1,4 @@
-<h2>Créer une nouvelle sortie</h2>
+<h2 class="menu-title" style="text-align: center;">Créer une nouvelle sortie</h2>
 
 
 <div class="form-event" [formGroup]="eventForm">
@@ -6,8 +6,8 @@
     <mat-label>Nom de l'événement</mat-label>
     <input matInput formControlName="name" (blur)="updateErrorMessage()" required />
   </mat-form-field>
-  <div style="display:flex;">
-    <mat-form-field style="flex:1; padding-right: 10px;">
+  <div class="responsive-container">
+    <mat-form-field>
       <mat-label>Date de l'événement</mat-label>
       <input matInput [min]="minDate"  [matDatepicker]="startDatePicker" 
       (dateChange)="onDateChange($event)"
@@ -18,7 +18,7 @@
       </mat-datepicker-toggle>
       <mat-datepicker #startDatePicker  ></mat-datepicker>
     </mat-form-field>
-    <mat-form-field style="flex:1">
+    <mat-form-field>
       <mat-label>Heure de l'événement</mat-label>
       <input matInput [ngxMatTimepicker]="pickerB" [format]="24" formControlName="eventTime" placeholder="14:00"
        placeholder="" required readonly>
@@ -26,8 +26,8 @@
     </mat-form-field>
     <ngx-mat-timepicker #pickerB (timeSet)="onTimeChange($event)"></ngx-mat-timepicker>
   </div>
-  <app-duration (valueChange)="onDurationChange($event)"></app-duration>
-  <app-address-input (addressSelected)="onAddressSelected($event)"></app-address-input>
+  <app-duration style="width:100%" (valueChange)="onDurationChange($event)"></app-duration>
+  <app-address-input style="width:100%" (addressSelected)="onAddressSelected($event)"></app-address-input>
  @if(errorAddress.length > 0){
   <div class="errorMessage"><p>{{errorAddress}}</p></div>
  }
@@ -37,9 +37,8 @@
     <textarea style="min-height: 170px;" matInput formControlName="infos" (blur)="updateErrorMessage()"></textarea>
   </mat-form-field>
 
-  <div style="display:flex;">
-
-    <mat-form-field style="flex:1;padding-right:10px;">
+  <div class="responsive-container">
+    <mat-form-field>
       <mat-label>Nombre maximal de participants (vous inclus)</mat-label>
       <mat-select formControlName="maxMembers">
         @for (num of numbers; track $index) {
@@ -50,7 +49,7 @@
 
       </mat-select>
     </mat-form-field>
-    <mat-form-field style="flex:0.6; ">
+    <mat-form-field>
       <mat-label>Fin des inscriptions</mat-label>
       <input matInput [min]="minDate" [matDatepicker]="deadlinePicker" formControlName="deadline">
       <mat-hint>DD/MM/YYYY</mat-hint>
@@ -61,11 +60,10 @@
     </mat-form-field>
   </div>
   <br />
-  <mat-checkbox style="margin-left: 110%;" (change)="updateCheckbox($event.checked)">Enregistrer en tant que
+  <mat-checkbox   (change)="updateCheckbox($event.checked)">Enregistrer en tant que
     brouillon</mat-checkbox>
   <div style="display:flex; gap: 20px; flex-direction: row-reverse;">
     <button mat-stroked-button (click)="submit()" [disabled]="isSubmitting">Créer la sortie</button>
     <button mat-button (click)="navigateTo('/')">Annuler</button>
   </div>
-
 </div>

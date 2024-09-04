@@ -12,7 +12,6 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: rgb(145, 185, 185);
 
 }
 
@@ -245,17 +244,41 @@ app-small-navbar {
 
 .form-event {
   display: flex;
-  min-width: 500px;
-  max-width: 600px;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-
-
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.responsive-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
 }
 
-.form-event>* {
-  width: 100%;
+.responsive-container mat-form-field {
+  flex: 1 1 calc(50% - 10px); 
+  min-width: 150px;
+}
+
+@media (max-width: 600px) {
+  .responsive-container mat-form-field {
+    flex: 1 1 100%;
+  }
+}
+@media (max-width: 605px) {
+
+  .form-event{
+    width:100%;
+  }
+}
+@media (max-width: 1300px) and (min-width:606px){
+
+  .form-event{
+    width:80%;
+  }
 }
 
 .event-page {
@@ -381,4 +404,5 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(145, 185, 185);
 }
