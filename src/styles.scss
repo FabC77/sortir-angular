@@ -141,6 +141,10 @@ padding-bottom: 1px;
 }
 
 app-small-navbar {
+  position:fixed;
+  top:0;
+  width: 100%;
+  z-index:1000;
   height: 70px;
   display: flex;
   background: rgb(83, 147, 105);
@@ -152,12 +156,14 @@ app-small-navbar {
   flex: 5;
   display: flex;
   flex-direction: row;
+  z-index: 1;
   gap: 15px;
    justify-content:start space-evenly;
 
 }
 
 .small-navbar-right {
+  z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: row;
