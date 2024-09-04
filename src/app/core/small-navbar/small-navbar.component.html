@@ -1,0 +1,130 @@
+<div class="small-navbar-left">
+    <span style="color:white;font-size: 30px; 
+    vertical-align: center; align-self: center;
+    padding: 10px;
+    padding-right:20px">LOGO</span>
+    
+    <div class="mid-navbar-left">
+        <div class="mid-navbar-button"  (click)="navigateTo('/home')">
+            <img  style="margin-top: 3px;" src="assets/icons/search.png" height="17px" width="17px"  />
+            Accueil
+        </div>
+        <div  class="mid-navbar-button"  (click)="navigateTo('/events')">
+            <img style="margin-top: 3px;" src="assets/icons/events2.png" height="17px" width="17px"  />
+            Mes sorties
+        </div>
+        <div class="mid-navbar-button"  (click)="navigateTo('/events/new')">
+            <img  style="margin-top: 3px;" src="assets/icons/newevent.png" height="17px" width="17px"  />
+            Proposer
+        </div>
+    </div>
+    <div class="mobile" style="padding-top: 3px;">
+        <div class="small-navbar-button">
+            <img src="assets/icons/search.png" height="30px" width="30px" (click)="navigateTo('/home')"/>
+        </div>
+        <div  class="small-navbar-button">
+            <img src="assets/icons/events2.png" height="30px" width="30px" (click)="navigateTo('/events')"/>
+        </div>
+        <div  class="small-navbar-button">
+            <img src="assets/icons/newevent.png" height="30px" width="30px" (click)="navigateTo('/events/new')"/>
+        </div>
+       
+    </div>
+
+
+</div>
+<div class="small-navbar-right">
+    <div class="mid-navbar-right">
+        <div class="profile-container">
+            @if(!isLoggedIn){
+          
+            }@else if(profilePicture.includes('')) {
+                <div  >
+                    <img
+                    style="padding-top:6px; padding-right: 6px;"
+                    src="assets/icons/default-profil-icon.png" width="40px" height="40px" alt="default profile icon">
+                </div>
+            }@else{}
+          
+        </div>
+        @if(!isLoggedIn){
+            <div 
+            style="
+            background-color: rgba(182, 255, 98, 0.712);
+            border-radius: 10px;
+            border: 2px solid rgb(255, 255, 255);
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            display: flex; flex-direction: row;
+            "
+            (click)="navigateTo('/login')">
+           <p style="color: black; padding-right: 6px;
+           padding-left: 6px;
+           font-weight: 500;">Se connecter</p> 
+            <img src="assets/icons/login.png"  width="25px" height="25px" alt="login icon">
+
+            </div>
+        } @else {
+
+            <div 
+            style="
+            border-radius: 10px;
+            border: 2px solid rgb(94, 25, 25);
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            "
+            (click)="logout()">
+                <img src="assets/icons/logout.png" width="25px" height="25px" alt="logout icon">
+            </div >
+        }
+    </div>
+    <div class="mobile" style=" padding-right:6px">
+       
+            @if(!isLoggedIn){
+          
+            }@else if(profilePicture.includes('')) {
+                <div  >
+                    <img
+                    style="padding-top:6px; padding-right: 6px;"
+                    src="assets/icons/default-profil-icon.png" width="40px" height="40px" alt="default profile icon">
+                </div>
+            }@else{}
+        
+       
+        @if(!isLoggedIn){
+       
+            <div 
+            style="
+            background-color: rgba(182, 255, 98, 0.712);
+            border-radius: 10px;
+            border: 2px solid rgb(255, 255, 255);
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            "
+            (click)="navigateTo('/login')">
+            <img src="assets/icons/login.png"  width="25px" height="25px" alt="login icon">
+
+            </div>
+
+       
+
+        } @else {
+
+                <div 
+                style="
+                border-radius: 10px;
+                border: 2px solid rgb(94, 25, 25);
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 5px;
+                "
+                (click)="logout()">
+                    <img src="assets/icons/logout.png" width="25px" height="25px" alt="logout icon">
+                </div >
+    
+               }
+    </div>
+</div>
