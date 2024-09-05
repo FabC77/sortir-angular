@@ -6,11 +6,15 @@ import { UserEvent } from '../model/user-event';
 import { DatePipe } from '@angular/common';
 import { EventStatusService } from '../../service/event-status.service';
 import { EventStatus } from '../model/eventstatus.enum';
+import { EventPanelComponent } from '../../shared/event-panel/event-panel.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [MatTableModule, DatePipe],
+  imports: [MatTableModule, DatePipe, EventPanelComponent
+    , MatProgressSpinnerModule
+  ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
@@ -41,8 +45,10 @@ export class EventsComponent {
         }
       }
     )
-
   }
+ 
+
+
   openPage(row: any) {
     this.route.navigate(['event/' + row.id]);
   }

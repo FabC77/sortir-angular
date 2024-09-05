@@ -68,13 +68,7 @@
         } @else {
 
             <div 
-            style="
-            border-radius: 10px;
-            border: 2px solid rgb(94, 25, 25);
-            padding-left: 5px;
-            padding-right: 5px;
-            padding-top: 5px;
-            "
+            class="small-logout"
             (click)="logout()">
                 <img src="assets/icons/logout.png" width="25px" height="25px" alt="logout icon">
             </div >
@@ -106,22 +100,13 @@
             "
             (click)="navigateTo('/login')">
             <img src="assets/icons/login.png"  width="25px" height="25px" alt="login icon">
-
             </div>
-
-       
 
         } @else {
 
                 <div 
-                style="
-                border-radius: 10px;
-                border: 2px solid rgb(94, 25, 25);
-                padding-left: 5px;
-                padding-right: 5px;
-                padding-top: 5px;
-                "
-                (click)="logout()">
+                class="small-logout"
+                        (click)="logout()">
                     <img src="assets/icons/logout.png" width="25px" height="25px" alt="logout icon">
                 </div >
     

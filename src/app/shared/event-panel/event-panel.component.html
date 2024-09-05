@@ -1,0 +1,50 @@
+@if(!isLoading){
+
+
+
+<div class="event-panel">
+    @if(deadlineSoon && event.status !== 'CLOSED' && event.status !== 'ARCHIVED'
+    && event.status !== 'CANCELLED'
+    ){
+    <div class="deadline">
+        {{deadlineMessage}}
+    </div>
+    }@else {<p>test</p>}
+    <div class="event-panel-main">
+        <div class="image-block">
+            <img loading="lazy" src="assets/pics/default-event-picture.jpg" width="100%" alt="event pic default" />
+        </div>
+        <div class="no-picture">
+            <div class="updated">
+                <div class="maj">
+                    Mis à jour
+                </div>
+            </div>
+
+            <div class="date">
+                {{event.startDate | date:'ccc dd MMM YYYY à h:mm'|titlecase}}
+            </div>
+            <div class="title">
+                {{event.name}}
+            </div>
+            <div class="location">
+                {{event.locationName}}
+            </div>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="participants">
+                    {{event.currentMembers}} participant(s)
+                </div>
+                <div class="status-block">
+                    <div class="status">
+                        {{convertStatus(event.status)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+} @else {
+    <mat-progress-spinner></mat-progress-spinner>
+}

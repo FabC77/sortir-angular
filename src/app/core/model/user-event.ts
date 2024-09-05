@@ -13,4 +13,5 @@ export interface UserEvent {
     deadline: Date;
     maxMembers: number;
     currentMembers: number;
+    lastUpdated:Date;
 }

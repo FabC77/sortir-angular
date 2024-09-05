@@ -68,8 +68,18 @@ app-header {
     display: none !important;
   }
 }
+.small-logout{
+  border-radius: 10px;
+  border: 2px solid rgb(94, 25, 25);
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+}
+.small-logout:hover{
+  background-color: rgba(255, 0, 0, 0.281);
+}
 
-@media screen and (max-width:767px) and (min-width:606px) {
+@media screen and (max-width:850px) and (min-width:606px) {
   app-navbar {
     display: none;
     
@@ -179,7 +189,7 @@ app-small-navbar {
 }
 
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 851px) {
   app-small-navbar {
     display: none;
   }

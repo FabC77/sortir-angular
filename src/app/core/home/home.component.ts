@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { EventPanelComponent } from "../../shared/event-panel/event-panel.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [EventPanelComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
