@@ -1,26 +1,20 @@
-@if(!isLoading){
-
+ 
+@if (!isLoading) {
 
 
 <div class="event-panel">
-    @if(deadlineSoon && event.status !== 'CLOSED' && event.status !== 'ARCHIVED'
-    && event.status !== 'CANCELLED'
-    ){
-    <div class="deadline">
-        {{deadlineMessage}}
-    </div>
-    }@else {<p>test</p>}
-    <div class="event-panel-main">
+    <div class="event-panel-main" (click)="navigateTo()">
         <div class="image-block">
             <img loading="lazy" src="assets/pics/default-event-picture.jpg" width="100%" alt="event pic default" />
         </div>
         <div class="no-picture">
+            @if(updatedRecently){
             <div class="updated">
                 <div class="maj">
                     Mis à jour
                 </div>
             </div>
-
+        }@else {}
             <div class="date">
                 {{event.startDate | date:'ccc dd MMM YYYY à h:mm'|titlecase}}
             </div>
@@ -43,8 +37,14 @@
         </div>
 
     </div>
-
+    @if(deadlineSoon && event.status !== 'CLOSED' && event.status !== 'ARCHIVED'
+    && event.status !== 'CANCELLED'
+    ){
+    <div class="deadline">
+        {{deadlineMessage}}
+    </div>
+    }@else { <div class="deadline" style="visibility: hidden;">''</div>}
 </div>
 } @else {
-    <mat-progress-spinner></mat-progress-spinner>
-}
+    <mat-spinner></mat-spinner>
+  }

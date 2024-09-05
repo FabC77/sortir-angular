@@ -37,7 +37,6 @@ export class EventsComponent {
           console.log("data received : " + JSON.stringify(data));
           this.sortEvents(data);
 
-          this.isLoading = false;
         },
         error: (err) => {
           console.log("error : ", err);
@@ -45,9 +44,13 @@ export class EventsComponent {
         }
       }
     )
+  
+
   }
  
-
+  ngAfterContentInit(){
+    this.isLoading = false;
+   }
 
   openPage(row: any) {
     this.route.navigate(['event/' + row.id]);
@@ -61,7 +64,7 @@ export class EventsComponent {
     this.createdEvents = data.filter(element => element.organizer === true);
   this.events = data.filter(element => element.organizer !== true);
 
-  console.log("APRES TRANSFERT : createdEvents empty? :  ",this.createdEvents.length>0);
+  console.log("APRES TRANSFERT : createdEvents not empty? :  ",this.createdEvents.length>0);
   
   }
 }

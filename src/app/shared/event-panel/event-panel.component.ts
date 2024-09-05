@@ -16,48 +16,62 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   templateUrl: './event-panel.component.html',
   styleUrl: './event-panel.component.scss'
 })
-export class EventPanelComponent   {
-isLoading:boolean=false;
+export class EventPanelComponent {
+  isLoading: boolean = true;
   deadlineSoon: boolean = false;
-  deadlineMessage: string='';
-  @Input() event!: any;
+  deadlineMessage: string = '';
+  @Input() event: any;
+  eventId!: number;
+updatedRecently: boolean = false;
+
 
   constructor(private router: Router, private statusService: EventStatusService) {
   }
 
 
- 
+
   ngOnInit() {
     this.deadlineMessage = this.convertDeadline(this.event.deadline);
-      this.isLoading = false;
-   }
+    this.eventId = this.event.id;
+this.updateCheck();
 
-  navigateTo(link: string) {
-    this.router.navigate([link]);
+    this.isLoading = false;
+    console.log("PANEL LOADED");
+  }
+
+
+  navigateTo() {
+    this.router.navigate(['event/' + this.event.id]);
   }
   convertStatus(status: EventStatus): string {
     return this.statusService.getStatusTranslation(status);
   }
 
+  updateCheck(){
+    const now = new Date();
+    
+
+  }
   convertDeadline(deadline: Date): string {
     const now = new Date();
-    const timeDiff = deadline.getTime() - now.getTime();
+    const dead = new Date(deadline);
+    let timeDiff = dead.getTime() - now.getTime();
 
-    const diffInDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const diffInHours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let diffInDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    let diffInHours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
 
     if (diffInDays > 0) {
       this.deadlineSoon = true;
-      return `Il reste ${diffInDays} jour${diffInDays > 1 ? 's' : ''} avant la deadline.`;
+      return `Fin des inscriptions : ${diffInDays} jour${diffInDays > 1 ? 's' : ''}.`;
     } else if (diffInHours > 0) {
       this.deadlineSoon = true;
 
-      return `Il reste ${diffInHours} heure${diffInHours > 1 ? 's' : ''} avant la deadline.`;
+      return `Fin des inscriptions : ${diffInHours} heure${diffInHours > 1 ? 's' : ''}.`;
     } else {
       this.deadlineSoon = true;
 
-      return "Moins d'une heure avant la deadline.";
+      return "Fin des inscriptions : moins d'une heure.";
     }
 
   }
