@@ -29,7 +29,6 @@ export class EventService {
       if (err.status === 403) {
      this.authService.expired();
       }
-      // Renvoyer l'erreur pour que le composant puisse la gérer aussi
       return throwError(() => err);
     })
   );

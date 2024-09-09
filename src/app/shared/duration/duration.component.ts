@@ -22,7 +22,6 @@ export class DurationComponent {
     const hours = Math.floor(value / 60);
     const minutes = value % 60;
     if (value == 0) return 'Inconnue';
-    // Format l'affichage comme "1h 00m" ou "0h 10m"
     return `${hours}h ${minutes.toString().padStart(2,'0')}m`;
   }
 

@@ -121,7 +121,6 @@ this.isSubmitting=true;
     this.eventForm.reset();
   }
 
-  // Propriété pour stocker la valeur
   onDurationChange(value: number): void {
     const h = Math.floor(value / 60);
     const m = value % 60;

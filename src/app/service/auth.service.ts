@@ -95,7 +95,6 @@ checkTokenValidity() {
       const decodedToken = jwtDecode(token) as any;
       const now = new Date().getTime() / 1000;
       if (decodedToken.exp < now) {
-          // Token has expired
           localStorage.removeItem('authToken');
           this.router.navigate(['/login']);
       }
