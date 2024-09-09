@@ -27,6 +27,7 @@ export class AuthService {
 
               localStorage.setItem('authToken', data.token);
               localStorage.setItem('fullName', data.fullName);
+              localStorage.setItem('campusId', data.campusId);
               localStorage.setItem('profilePicture', data.profilePicture);
               console.log('Token stored successfully:', data.token);
               subscriber.next(data);
@@ -68,6 +69,7 @@ export class AuthService {
         next: () => {
           localStorage.removeItem('authToken');
           localStorage.removeItem('fullName');
+          localStorage.removeItem('campusId');
           localStorage.removeItem('profilePicture');
           this.router.navigate(['/login']);
           this.loggedInSubject.next(false);
@@ -84,6 +86,8 @@ export class AuthService {
   expired(){
     localStorage.removeItem('authToken');
     localStorage.removeItem('fullName');
+    localStorage.removeItem('campusId');
+
     this.router.navigate(['/login']);
   }
 
@@ -96,6 +100,9 @@ checkTokenValidity() {
       const now = new Date().getTime() / 1000;
       if (decodedToken.exp < now) {
           localStorage.removeItem('authToken');
+          localStorage.removeItem('campusId');
+          localStorage.removeItem('fullName');
+
           this.router.navigate(['/login']);
       }
   }

@@ -3,4 +3,28 @@
     todo : search bar, liste des sorties
 </div>
 
- 
+<div class="form-search" [formGroup]="searchForm"
+(ngSubmit)="search()">
+    <mat-form-field>
+        <mat-label>Campus</mat-label>
+        <mat-select [(value)]="selectedCampus"  (selectionChange)="search()">
+            @for (camp of campusList; track $index) {
+            <mat-option [value]="camp.id"
+                       >{{camp.name}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <input type="text" placeholder="Entrez un mot clé" id="searchbar"  formControlName="keyword" 
+        /> 
+</div>
+<p>resultat : </p>
+@if (isLoading) {
+    <mat-progress-spinner></mat-progress-spinner>
+}@else {
+    <div>
+        @for (ev of searchedEvents; track $index) {
+        {{ev.name}}
+        }
+    </div>
+}

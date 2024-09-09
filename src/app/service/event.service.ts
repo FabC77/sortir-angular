@@ -5,6 +5,8 @@ import { environment } from '../../environment';
 import { UserEvent } from '../core/model/user-event';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import Campus from '../core/model/campus';
+import { EventModel } from '../core/model/eventModel';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,12 @@ export class EventService {
       return throwError(() => err);
     })
   );
+  }
+  getCampuses():Observable<Campus[]>{
+    return  this.http.get<Campus[]>(`${environment.baseUrl}/campuses`);
+    }
+  searchEvents(form:any): Observable<EventModel[]>{
+    return this.http.post<EventModel[]>(`${environment.baseUrl}/event/search`,form);
   }
 
 }
