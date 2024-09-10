@@ -407,7 +407,7 @@ mat-form-field {
 .menu-title {
   color: white;
   text-shadow: 2px 2px 3px grey;
-
+user-select: none;
 
 }
 
@@ -416,6 +416,8 @@ mat-form-field {
   color: white;
   text-shadow: 2px 2px 3px grey;
   padding-bottom: 8px;
+  user-select: none;
+
 }
 
 html,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { EventPanelComponent } from "../../shared/event-panel/event-panel.component";
 import { MatFormField, MatInput, MatInputModule } from '@angular/material/input';
 import { EventService } from '../../service/event.service';
@@ -9,22 +9,37 @@ import Campus from '../model/campus';
 import { EventModel } from '../model/eventModel';
 import { debounceTime } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [ReactiveFormsModule, EventPanelComponent,
     MatFormField, MatSelectModule,
+    MatCheckbox,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatIconModule,
     MatInput, MatInputModule, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  providers: [provideNativeDateAdapter()],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
-export class HomeComponent implements OnInit  {
-  
+export class HomeComponent implements OnInit {
+
+
+  maskedFull: boolean = false;
   campusList!: Campus[];
   selectedCampus!: number;
   isLoading: boolean = true;
+  eventsLoading:boolean = true;
   searchedEvents!: EventModel[];
   searchForm = this.formBuilder.group({
     campusId: this.selectedCampus,
@@ -35,12 +50,15 @@ export class HomeComponent implements OnInit  {
   });
 
   constructor(private router: Router, private eventService: EventService, private formBuilder: FormBuilder) {
- 
+
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.loadCampuses();
-    this.setupKeywordSearch();
+    this.setupListeners();
+    this.isLoading = false;
+
   }
 
   private loadCampuses(): void {
@@ -71,16 +89,33 @@ export class HomeComponent implements OnInit  {
     });
   }
 
-  private setupKeywordSearch(): void {
+  private setupListeners(): void {
     this.searchForm.get('keyword')?.valueChanges
       .pipe(
         debounceTime(1000)
       )
       .subscribe(keyword => {
-       
-          this.search();
-        
+
+        this.search();
+
       });
+    this.searchForm.get('startDate')?.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(startDate => {
+        this.search();
+      });
+
+
+    this.searchForm.get('endDate')?.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(endDate => {
+        this.search();
+      });
+
   }
 
   private loadEvents(): void {
@@ -88,20 +123,21 @@ export class HomeComponent implements OnInit  {
       next: (events: EventModel[]) => {
         this.searchedEvents = events;
         console.log("Événements recherchés chargés", events.length);
-        this.isLoading = false;
+        this.eventsLoading= false;
       },
       error: (err) => {
         console.log("Erreur de récupération des événements", err);
-        this.isLoading = false;
+        this.eventsLoading= false;
       }
     });
   }
 
   search(): void {
+    this.eventsLoading= true;
     this.searchedEvents = [];
-    this.isLoading = true;
+    this.eventsLoading= false;
     console.log("Recherche avec le formulaire: ", this.searchForm.value);
- 
+
 
     this.searchForm.patchValue({
       campusId: this.selectedCampus,
@@ -115,7 +151,19 @@ export class HomeComponent implements OnInit  {
         console.log("Erreur de récupération des événements", err);
       }
     });
-    this.isLoading = false;
+    this.eventsLoading= false;
 
   }
+  updateFilter() {
+    this.maskedFull = !this.maskedFull;
+    console.log("masked status: ", this.maskedFull);
+
+  }
+  clear() {
+ this.searchForm.patchValue({
+keyword:'',
+startDate:null,
+endDate:null,
+    
+    })};
 }
