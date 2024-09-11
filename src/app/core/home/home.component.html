@@ -1,7 +1,7 @@
 @if (isLoading) {
 <mat-progress-spinner></mat-progress-spinner>
 }@else {
-<h2 class="menu-title">HOME - WIP</h2>
+<h2 class="menu-title">Accueil - WIP</h2>
 
 
 <div class="form-search" [formGroup]="searchForm" (ngSubmit)="search()">
@@ -42,17 +42,22 @@
 
     </div>
 </div>
-<p>resultat (wip): </p>
+<p> todo= reactive design, longues listes  </p>
+<div class="section-title">Sorties trouvées</div>
+
 @if (eventsLoading) {
 <mat-progress-spinner></mat-progress-spinner>
 }@else {
-<div>
+<div style="width: 100%;  flex-direction: column; display: flex; align-items: center; overflow-y: auto; ">
     @for (ev of searchedEvents; track $index) {
     @if (maskedFull && (ev.maxMembers != ev.currentMembers)) {
-    {{ev.name}}
+      
+    <search-panel></search-panel>
 
     } @else{
-    {{ev.name}}
+     
+    <search-panel [event]="ev"></search-panel>
+
     }
 
     }

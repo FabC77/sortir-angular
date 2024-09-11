@@ -1,0 +1,27 @@
+<div class="container" (click)="navigateTo()">
+    <div class="line">
+
+        <div class="name">
+            {{event.name}}
+        </div>
+        <div class="separation">|</div> 
+        <div class="location">
+            {{event.locationName}}
+        </div>
+        <div class="separation">|</div> 
+        <div class="date">
+            {{event.startDate|date:'ccc dd MMM YYYY à h:mm'|titlecase}}
+        </div>
+        <div class="separation">|</div> 
+        <div class="members">
+            {{event.currentMembers}}/{{event.maxMembers}} participants
+        </div>
+        <div class="separation"> </div> 
+        <div class="statusBlock">
+            <div class="status">
+                {{convertStatus(event.status)}}
+            </div>
+          
+        </div>
+    </div>
+</div>

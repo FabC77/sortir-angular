@@ -59,7 +59,10 @@ this.updateCheck();
 
     let diffInDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     let diffInHours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
+    if (timeDiff <= 0) {
+      this.deadlineSoon = false;  
+      return "Les inscriptions sont closes.";
+    }
 
     if (diffInDays > 0) {
       this.deadlineSoon = true;

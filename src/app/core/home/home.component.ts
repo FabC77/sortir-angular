@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { EventSearchPanelComponent } from '../../shared/event-search-panel/event-search-panel.component';
 
 
 @Component({
@@ -26,6 +27,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatButtonModule,
     MatIconModule,
+    EventSearchPanelComponent,
     MatInput, MatInputModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

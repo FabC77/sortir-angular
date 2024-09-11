@@ -352,12 +352,10 @@ app-login {
 app-home {
   display: flex;
   align-items: center;
-
   flex-direction: column;
-
-
 }
 
+ 
 mat-form-field {
   width: 100%;
 }
