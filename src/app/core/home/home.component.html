@@ -14,7 +14,7 @@
                 }
             </mat-select>
         </mat-form-field>
-        <input class="searchInput" appearance="fill" type="text" placeholder="Entrez un mot clé" id="searchbar"
+        <input class="searchInput"   type="text" placeholder="Entrez un mot clé" id="searchbar"
             formControlName="keyword" />
         <div>
             <a class="clearButton" mat-stroked-button (click)="clear()" target="_blank">
@@ -24,8 +24,8 @@
             </a>
         </div>
     </div>
-    <div style="display: flex; flex-direction: row; align-items: center;  ">
-        <div style="flex:1; padding-right: 12px;">
+    <div style="display: flex; flex-direction: row; align-items: center;  flex-wrap: wrap; ">
+        <div class="dateRange" >
             <mat-form-field>
                 <mat-label>Définissez une période</mat-label>
                 <mat-date-range-input [rangePicker]="picker">
@@ -37,7 +37,7 @@
             </mat-form-field>
 
         </div>
-        <div style="flex:3; width: 100%; margin-top: -14px;"> <mat-checkbox (change)="updateFilter()">Masquer les
+        <div class="fullFilter"  > <mat-checkbox (change)="updateFilter()">Masquer les
                 sorties pleines</mat-checkbox> </div>
 
     </div>

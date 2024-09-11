@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { EventPanelComponent } from "../../shared/event-panel/event-panel.component";
 import { MatFormField, MatInput, MatInputModule } from '@angular/material/input';
 import { EventService } from '../../service/event.service';
@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-home',
@@ -49,17 +50,22 @@ export class HomeComponent implements OnInit {
     full: true,
   });
 
-  constructor(private router: Router, private eventService: EventService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, 
+    private cdr: ChangeDetectorRef,
+   
+    private eventService: EventService, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
+   
     this.loadCampuses();
     this.setupListeners();
     this.isLoading = false;
 
   }
+ 
+
 
   private loadCampuses(): void {
     this.eventService.getCampuses().subscribe({
@@ -81,12 +87,19 @@ export class HomeComponent implements OnInit {
         } else {
           console.warn('Campus ID non trouvé dans le localStorage.');
         }
-        this.loadEvents(); // Charger les événements après avoir chargé les campus
+        
+       
+        this.loadEvents();
+       
+          this.search(); 
+    
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.log('Erreur lors du chargement des campus', err);
       }
     });
+
   }
 
   private setupListeners(): void {
@@ -119,10 +132,11 @@ export class HomeComponent implements OnInit {
   }
 
   private loadEvents(): void {
+    this.eventsLoading= true;
     this.eventService.searchEvents(this.searchForm.value).subscribe({
       next: (events: EventModel[]) => {
         this.searchedEvents = events;
-        console.log("Événements recherchés chargés", events.length);
+        console.log("Événements recherchés chargés dans loadEvents:", events.length);
         this.eventsLoading= false;
       },
       error: (err) => {
@@ -146,12 +160,15 @@ export class HomeComponent implements OnInit {
       next: (events: EventModel[]) => {
         this.searchedEvents = events;
         console.log("Événements recherchés chargés", events.length);
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.log("Erreur de récupération des événements", err);
+      },
+      complete: () => {
+        this.eventsLoading= false;
       }
     });
-    this.eventsLoading= false;
 
   }
   updateFilter() {

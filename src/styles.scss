@@ -41,82 +41,93 @@ app-header {
 }
 
 @media screen and (max-width:605px) {
-  app-header{
+  app-header {
     font-size: 14px;
     font-weight: 400;
-    gap:3px;
+    gap: 3px;
     padding-top: 5px;
     padding-right: 7px;
 
   }
-  .main-content{
+
+  .main-content {
     margin-top: 70px;
   }
 
   app-navbar {
     display: none;
   }
-  .mobile{
+
+  .mobile {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;
   }
-  .mid-navbar-left{
+
+  .mid-navbar-left {
     display: none !important;
   }
+
   .mid-navbar-right {
     display: none !important;
   }
 }
-.small-logout{
+
+.small-logout {
   border-radius: 10px;
   border: 2px solid rgb(94, 25, 25);
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 5px;
 }
-.small-logout:hover{
+
+.small-logout:hover {
   background-color: rgba(255, 0, 0, 0.281);
 }
 
 @media screen and (max-width:850px) and (min-width:606px) {
   app-navbar {
     display: none;
-    
+
   }
-  app-header{
+
+  app-header {
     font-size: 23px;
     font-weight: 350;
-    gap:3px;
+    gap: 3px;
     padding-top: 5px;
     padding-right: 15px;
 
   }
-  app-small-navbar{
-  
-   color: white;
+
+  app-small-navbar {
+
+    color: white;
   }
 
   .mobile {
     display: none;
   }
-  .main-content{
+
+  .main-content {
     margin-top: 60px;
   }
 
 }
-.mid-navbar-left{
-  
+
+.mid-navbar-left {
+
   display: flex;
   flex-direction: row;
   align-items: center;
   font-size: 17px;
   white-space: nowrap;
-  gap:20px;
+  gap: 20px;
   z-index: 1;
 
 }
-.mid-navbar-right{
+
+.mid-navbar-right {
   z-index: 2;
   display: flex;
   flex-direction: row;
@@ -124,43 +135,45 @@ app-header {
   padding: 10px;
   align-items: center;
   font-size: 12px;
-  gap:20px;
+  gap: 20px;
   position: absolute;
 }
 
-.mid-navbar-button{
+.mid-navbar-button {
   border-radius: 10px;
-padding-left:9px;
-padding-right:9px;
-padding-top: 6px;
-padding-bottom: 6px;
-display: flex;
-flex-direction: row;
-gap:12px;
-justify-content: center;
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
 }
-.mid-navbar-button:hover{
+
+.mid-navbar-button:hover {
   background-color: rgba(214, 214, 214, 0.411);
 
 }
 
 .small-navbar-button {
-border-radius: 10px;
-padding-left:9px;
-padding-right:9px;
-padding-top: 6px;
-padding-bottom: 1px;
+  border-radius: 10px;
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-top: 6px;
+  padding-bottom: 1px;
 }
-.small-navbar-button:hover{
+
+.small-navbar-button:hover {
   background-color: rgba(214, 214, 214, 0.411);
 
 }
 
 app-small-navbar {
-  position:fixed;
-  top:0;
+  position: fixed;
+  top: 0;
   width: 100%;
-  z-index:1000;
+  z-index: 1000;
   height: 70px;
   display: flex;
   background: rgb(83, 147, 105);
@@ -174,7 +187,7 @@ app-small-navbar {
   flex-direction: row;
   z-index: 1;
   gap: 15px;
-   justify-content:start space-evenly;
+  justify-content: start space-evenly;
 
 }
 
@@ -185,7 +198,7 @@ app-small-navbar {
   flex-direction: row;
   align-items: center;
   justify-content: end;
-  
+
 }
 
 
@@ -273,7 +286,8 @@ app-small-navbar {
   padding: 10px;
   box-sizing: border-box;
 }
-.responsive-container{
+
+.responsive-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -281,7 +295,7 @@ app-small-navbar {
 }
 
 .responsive-container mat-form-field {
-  flex: 1 1 calc(50% - 10px); 
+  flex: 1 1 calc(50% - 10px);
   min-width: 150px;
 }
 
@@ -290,16 +304,18 @@ app-small-navbar {
     flex: 1 1 100%;
   }
 }
+
 @media (max-width: 605px) {
 
-  .form-event{
-    width:100%;
+  .form-event {
+    width: 100%;
   }
 }
-@media (max-width: 1300px) and (min-width:606px){
 
-  .form-event{
-    width:80%;
+@media (max-width: 1300px) and (min-width:606px) {
+
+  .form-event {
+    width: 80%;
   }
 }
 
@@ -331,6 +347,15 @@ app-login {
 
 .login-form {
   width: 100%;
+}
+
+app-home {
+  display: flex;
+  align-items: center;
+
+  flex-direction: column;
+
+
 }
 
 mat-form-field {
@@ -407,7 +432,7 @@ mat-form-field {
 .menu-title {
   color: white;
   text-shadow: 2px 2px 3px grey;
-user-select: none;
+  user-select: none;
 
 }
 
