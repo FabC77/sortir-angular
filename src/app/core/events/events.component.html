@@ -1,17 +1,23 @@
 @if (!isLoading) {
 <h2 class="menu-title">Mes sorties</h2>
 
+<br/>
+
+<div class="section-title">Vos prochaines sorties</div>
+<p>//Contenu temporaire pour tester l'intégration des composants. Tri des sorties à finaliser </p>
 @if(createdEvents.length > 0) {
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
   @for (ev of createdEvents; track $index) {
   <app-event-panel [event]="ev"></app-event-panel>
   }
 </div>
+}@else{
+  <div class="empty-table">
+    Aucune sortie
+  </div>
 }
 
-<br/>
 
-<div class="section-title">Vos prochaines sorties</div>
 @if(events.length > 0){
 
 <div class="table">

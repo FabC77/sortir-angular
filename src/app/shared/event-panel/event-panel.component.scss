@@ -57,10 +57,19 @@
 .title {
     font-size: 20px;
     font-weight: 500;
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap;  
+    width: 240px;
 }
 
 .location {
     color: grey;
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap;  
+    width: 240px;
+     
 }
 
 .participants {
