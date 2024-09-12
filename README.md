@@ -1,6 +1,10 @@
-# SortirAngular
+# Sortir-Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+## Description
+
+Frontend du projet 'Sortir', initialement développé dans le cadre d'un projet imposé durant ma formation, puis recréé ici avec Angular 18. Cette application web vise à permettre aux étudiants d'organiser des sorties. En cours de développement, non déployé.
+
+
 
 ## Development server
 
