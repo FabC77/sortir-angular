@@ -5,7 +5,6 @@
 Frontend du projet 'Sortir', initialement développé dans le cadre d'un projet imposé durant ma formation, puis recréé ici avec Angular 18. Cette application web vise à permettre aux étudiants d'organiser des sorties. En cours de développement, non déployé.
 
 
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
