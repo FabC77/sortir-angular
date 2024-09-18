@@ -1,7 +1,4 @@
-//backup basecolor :  rgb(145, 185, 185);
-$base-color: rgb(145, 185, 185);
-$base-color-darker: rgb(118, 153, 153);
-$base-color-light: rgb(240, 255, 255);
+@use '../src/styles/variables' as *;
 
 .app-container {
   display: flex;
@@ -21,7 +18,7 @@ $base-color-light: rgb(240, 255, 255);
 }
 
 .main-body {
-  //background-color: pink;
+   
   padding-left: 40px;
   padding-top: 16px;
   padding-right: 40px;
@@ -44,7 +41,8 @@ app-header {
   flex-direction: column;
   gap: 12px;
 }
-app-navbar{
+
+app-navbar {
   background-color: $base-color-darker;
 }
 
@@ -303,13 +301,19 @@ app-small-navbar {
   min-width: 150px;
 }
 
-@media (max-width: 600px) {
+
+
+@media (max-width: 605px) {
   .responsive-container mat-form-field {
     flex: 1 1 100%;
   }
+event-page, app-home, app-events{
+  padding: 5px;
 }
-
-@media (max-width: 605px) {
+  .main-body {
+    width: 100%;
+padding: 0;
+  }
 
   .form-event {
     width: 100%;
@@ -323,9 +327,11 @@ app-small-navbar {
   }
 }
 
-.event-page {
+event-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
 }
 
@@ -359,7 +365,7 @@ app-home {
   flex-direction: column;
 }
 
- 
+
 mat-form-field {
   width: 100%;
 }

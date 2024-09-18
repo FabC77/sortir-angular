@@ -1,57 +1,74 @@
-<p>TODO: mise en page+image</p>
+<p>TODO: mise en page avancée + gestion des images</p>
+<div style="color:white; padding-bottom: 5px;">Sortie proposée par {{event.organizerName}} ({{event.campusName}}) - Dernière mise à jour :
+    {{event.lastUpdated | date:"dd/MM/YYYY à HH:mm"}}
+</div>
 <div class="event-page">
-    <p>Sortie proposée par {{event.organizerName}} ({{event.campusName}}) - Dernière mise à jour : {{event.lastUpdated | date:"dd/MM/YYYY à HH:mm"}}
-</p>
-    <div style="display: flex; flex-direction: row; align-items: center;">
-        <h2>{{event.name}}</h2>
-        <div style="padding: 20px;">
-            <p style="font-weight: 600;">{{getConvertedStatus(event.status)}}
 
-            </p>
-        </div>
+    <div class="left-block">
+        @if (hasPicture) {
+
+        }@else {
+           <div class="default-picture">
+            <p>Insert default picture</p>
+           </div> 
+
+        }
+
     </div>
-    @if(event.status==="CANCELLED"){ <p>Motif de l'annulation : {{event.reason}}</p>}
-    <h4>{{event.startDate | date:'EEEE dd MMMM YYYY':'LOCALE_ID' | titlecase }} à {{event.startDate |
-        date:'H'}}h{{event.startDate | date:'mm'}}</h4>
-    @if (isLocationNotNamed()) {
-    <p>Lieu : {{event.locationName}}</p>
-    }
+    <div class="right-block">
+       
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <h2>{{event.name}}</h2>
+            <div style="padding: 20px;">
+                <p style="font-weight: 600;">{{getConvertedStatus(event.status)}}
 
-    <p>Adresse : {{event.address}}</p>
-    @if(event.duration !='0h0'){
-    <p>Durée de l'événement : {{event.duration}} </p>
-    }
-    <p>TODO : picture</p>
-
-    @if (event.infos !='') {
-    <p>Description : {{event.infos}}</p>
-    }@else {<p>Sans description</p>}
-    <p>Nombre de participants : {{ event.currentMembers }}
-        @if(event.currentMembers == event.maxMembers){
-        (COMPLET)
-        }
-    </p>
-    <p>Fin des inscriptions: {{event.deadline | date: 'EEEE dd MMMM YYYY'|titlecase }}  à {{event.deadline |
-        date:'H'}}h{{event.deadline | date:'mm'}}</p>
-    @if ((event.maxMembers - event.currentMembers) < 4 && (event.maxMembers - event.currentMembers) !=0 ) { <p>Places
-        disponibles : {{ event.maxMembers - event.currentMembers }}</p>
-        }
-        <div>
-            @if(event.status!=='FINISHED' && event.status!=='ARCHIVED' && event.status!=='IN_PROGRESS'){
-
-            @if(event.isCreator ==false){
-            <button mat-button [disabled]="event.currentMembers == event.maxMembers ||   event.status==='CLOSED'"
-                (click)="register()">S'inscrire</button>
-            @if(event.isEventMember==true){
-            <button mat-button (click)="leaveEvent()">Se désister</button>
-            }
-
-            } @else {
-            <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="updateEvent()">Modifier</button>
-            <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="cancel()">Annuler la sortie</button>
-            }
-        }
+                </p>
+            </div>
         </div>
+        @if(event.status==="CANCELLED"){ <p>Motif de l'annulation : {{event.reason}}</p>}
+        <h4>{{event.startDate | date:'EEEE dd MMMM YYYY':'LOCALE_ID' | titlecase }} à {{event.startDate |
+            date:'H'}}h{{event.startDate | date:'mm'}}</h4>
+        @if (isLocationNotNamed()) {
+        <p>Lieu : {{event.locationName}}</p>
+        }
+
+        <p>Adresse : {{event.address}}</p>
+        @if(event.duration !='0h0'){
+        <p>Durée de l'événement : {{event.duration}} </p>
+        }
       
 
+        @if (event.infos !='') {
+        <p>Description : {{event.infos}}</p>
+        }@else {<p>Sans description</p>}
+        <p>Nombre de participants : {{ event.currentMembers }}
+            @if(event.currentMembers == event.maxMembers){
+            (COMPLET)
+            }
+        </p>
+        <p>Fin des inscriptions: {{event.deadline | date: 'EEEE dd MMMM YYYY'|titlecase }} à {{event.deadline |
+            date:'H'}}h{{event.deadline | date:'mm'}}</p>
+        @if ((event.maxMembers - event.currentMembers) < 4 && (event.maxMembers - event.currentMembers) !=0 ) { <p>
+            Places
+            disponibles : {{ event.maxMembers - event.currentMembers }}</p>
+            }
+            <div>
+                @if(event.status!=='FINISHED' && event.status!=='ARCHIVED' && event.status!=='IN_PROGRESS'){
+
+                @if(event.isCreator ==false){
+                <button mat-button [disabled]="event.currentMembers == event.maxMembers ||   event.status==='CLOSED'"
+                    (click)="register()">S'inscrire</button>
+                @if(event.isEventMember==true){
+                <button mat-button (click)="leaveEvent()">Se désister</button>
+                }
+
+                } @else {
+                <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="updateEvent()">Modifier</button>
+                <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="cancel()">Annuler la
+                    sortie</button>
+                }
+                }
+            </div>
+
+    </div>
 </div>
