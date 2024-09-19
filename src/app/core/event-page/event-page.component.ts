@@ -8,6 +8,8 @@ import { DatePipe, TitleCasePipe } from '@angular/common';
 import { EventStatusService } from '../../service/event-status.service';
 import { EventStatus } from '../model/eventstatus.enum';
 import { EventModel } from '../model/eventModel';
+import { EventService } from '../../service/event.service';
+import Member from '../model/member';
 
 @Component({
   selector: 'event-page',
@@ -18,18 +20,23 @@ import { EventModel } from '../model/eventModel';
 })
 export class EventPageComponent {
   event!: EventModel;
+  members!: Member[];
   form: Object = { "reason": "parce que" }
-hasPicture: boolean = false;
+  hasPicture: boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient,
-    private enumService: EventStatusService
+    private enumService: EventStatusService, private eventService: EventService
   ) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit called");
-    const eventId = this.route.snapshot.paramMap.get('id');
-    console.log("Event ID: ", eventId);
+    this.loadData();
+  
+  }
 
-    this.http.get<EventModel>(`${environment.baseUrl}/event/${eventId}`).subscribe({
+  loadData(): void {
+    const eventIdParam = this.route.snapshot.paramMap.get('id');
+    console.log("Event ID: ", eventIdParam);
+    const eventId = Number(eventIdParam)
+    this.eventService.getEventById(eventId).subscribe({
       next: (data: EventModel) => {
         console.log("Data received: ", data);
         this.event = data;
@@ -39,6 +46,7 @@ hasPicture: boolean = false;
       }
     });
   }
+
   cancel() {
     this.http.put(`${environment.baseUrl}/event/${this.event.id}/cancel`, this.form)
       .subscribe({
@@ -64,12 +72,34 @@ hasPicture: boolean = false;
     return this.enumService.getStatusTranslation(enumRaw);
   }
   leaveEvent() {
-    throw new Error('Method not implemented.');
+    this.eventService.leaveEvent(this.event.id).subscribe({
+      next: (members) => {
+        this.members = members;
+        this.event.currentMembers--;
+        this.event.eventMember = false;
+      },
+      error: (err) => {
+        console.log("Erreur d'inscription : ", err);
+        this.loadData();
+
+      }
+    })
   }
   updateEvent() {
     throw new Error('Method not implemented.');
   }
-  register() {
-    throw new Error('Method not implemented.');
+  join() {
+    this.eventService.joinEvent(this.event.id).subscribe({
+      next: (members) => {
+        this.members = members;
+        this.event.currentMembers++;
+        this.event.eventMember = true;
+      },
+      error: (err) => {
+        console.log("Erreur d'inscription : ", err);
+        this.loadData();
+
+      }
+    })
   }
 }

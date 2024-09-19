@@ -4,8 +4,8 @@ export interface EventModel {
     id: number;
     status: EventStatus;
     organizerName: string;
-    isCreator: boolean;
-    isEventMember: boolean;
+    creator: boolean;
+    eventMember: boolean;
     name: string;
     infos: string;
     reason: string;

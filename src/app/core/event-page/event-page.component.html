@@ -1,5 +1,6 @@
 <p>TODO: mise en page avancée + gestion des images</p>
-<div style="color:white; padding-bottom: 5px;">Sortie proposée par {{event.organizerName}} ({{event.campusName}}) - Dernière mise à jour :
+<div style="color:white; padding-bottom: 5px;">Sortie proposée par {{event.organizerName}} ({{event.campusName}}) -
+    Dernière mise à jour :
     {{event.lastUpdated | date:"dd/MM/YYYY à HH:mm"}}
 </div>
 <div class="event-page">
@@ -8,15 +9,15 @@
         @if (hasPicture) {
 
         }@else {
-           <div class="default-picture">
+        <div class="default-picture">
             <p>Insert default picture</p>
-           </div> 
+        </div>
 
         }
 
     </div>
     <div class="right-block">
-       
+
         <div style="display: flex; flex-direction: row; align-items: center;">
             <h2>{{event.name}}</h2>
             <div style="padding: 20px;">
@@ -36,7 +37,7 @@
         @if(event.duration !='0h0'){
         <p>Durée de l'événement : {{event.duration}} </p>
         }
-      
+
 
         @if (event.infos !='') {
         <p>Description : {{event.infos}}</p>
@@ -52,16 +53,17 @@
             Places
             disponibles : {{ event.maxMembers - event.currentMembers }}</p>
             }
+            @if (event.eventMember) {
+            <p class="confirmation">Vous êtes inscrit(e)</p>
+            }
             <div>
                 @if(event.status!=='FINISHED' && event.status!=='ARCHIVED' && event.status!=='IN_PROGRESS'){
 
-                @if(event.isCreator ==false){
+                @if(event.creator ==false && event.eventMember == false){
                 <button mat-button [disabled]="event.currentMembers == event.maxMembers ||   event.status==='CLOSED'"
-                    (click)="register()">S'inscrire</button>
-                @if(event.isEventMember==true){
+                    (click)="join()">S'inscrire</button>}
+                @else if(event.eventMember==true){
                 <button mat-button (click)="leaveEvent()">Se désister</button>
-                }
-
                 } @else {
                 <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="updateEvent()">Modifier</button>
                 <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="cancel()">Annuler la
