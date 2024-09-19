@@ -1,54 +1,66 @@
 .container {
     background-color: rgb(240, 255, 255);
     border-radius: 15px;
-     width: 1200px;
-    min-width: 400px;
+     //width: 1200px;
+     width: 100%;
+     min-width: 400px;
     user-select: none;
-    height: 70px;
-display: flex;
-flex-direction: column;
-
-    flex-wrap: wrap;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    //flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 10px;
-    
+
 }
-.container:hover{
+
+.container:hover {
     background-color: white;
     scale: 101%;
 }
 
 .line {
-  display: flex;
-  flex-direction: row;
- 
-  justify-items:center ;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+     
+    justify-items: center;
+    align-items: center;
     padding-left: 20px;
     padding-right: 20px;
-}
-.name{
-flex:1;
-font-size: 18px;
-font-weight: 500;
-}
-.location{
-    flex:1;
-}
-.date{
-    flex:0.8;
-   display: flex;
-   align-items: center;
-    
-}
-.members{
-    flex:0.5;
-}
-.statusBlock{
-    flex:0.5;
-}
-.status {
    
+}
+
+.name {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 500;
+    min-width: 170px;
+}
+
+.location {
+    flex: 1;
+    min-width: 220px;
+}
+
+.date {
+    flex: 0.8;
+    display: flex;
+    align-items: center;
+    min-width: 140px;
+
+}
+
+.members {
+    flex: 0.5;
+}
+
+.statusBlock {
+    flex: 0.5;
+}
+
+.status {
+
     font-size: 13px;
     border-radius: 4px;
     color: #000000;
@@ -56,12 +68,67 @@ font-weight: 500;
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
+    white-space: nowrap;
 }
-.separation{
+
+.separation {
     padding-left: 10px;
-    flex:0.2;
-    transform: scaleY(2.5); 
-    transform-origin: center;  
-     font-weight: 300;
-     color:rgba(165, 165, 165, 0.568);
+    padding-right: 10px;
+    flex: 0.2;
+    transform: scaleY(2.5);
+    transform-origin: center;
+    font-weight: 300;
+    color: rgba(165, 165, 165, 0.568);
+}
+
+@media (max-width:605px) {
+    .members {
+        visibility: hidden;
+    }
+
+    .separation {
+        padding-left: 2px;
+        padding-right: 2px;
+        visibility: hidden;
+    }
+
+    .statusBlock {
+        flex: 0.2;
+    }
+
+    .date {
+        min-width: 200px;
+    }
+
+    .container {
+        flex-wrap: wrap;
+        min-width: 200px;
+    }
+
+    .line {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+}
+
+@media (max-width: 1300px) and (min-width:606px) {
+    .line {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        gap: 12px;
+        justify-content: space-between;
+    }
+
+    .members {
+        visibility: hidden;
+    }
+
+    .separation {
+        padding-left: 2px;
+        padding-right: 2px;
+        visibility: hidden;
+    }
+  
+
 }

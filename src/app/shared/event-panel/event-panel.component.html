@@ -38,7 +38,7 @@
 
     </div>
     @if(deadlineSoon && event.status !== 'CLOSED' && event.status !== 'ARCHIVED'
-    && event.status !== 'CANCELLED'
+    && event.status !== 'CANCELLED' && alreadyRegistered===false
     ){
     <div class="deadline">
         {{deadlineMessage}}

@@ -1,4 +1,4 @@
-<p>TODO: mise en page avancée + gestion des images</p>
+<p>TODO: gestion des images, modification des events, améliorer la mise en page</p>
 <div style="color:white; padding-bottom: 5px;">Sortie proposée par {{event.organizerName}} ({{event.campusName}}) -
     Dernière mise à jour :
     {{event.lastUpdated | date:"dd/MM/YYYY à HH:mm"}}
@@ -53,7 +53,7 @@
             Places
             disponibles : {{ event.maxMembers - event.currentMembers }}</p>
             }
-            @if (event.eventMember) {
+            @if (event.eventMember && event.creator ===false) {
             <p class="confirmation">Vous êtes inscrit(e)</p>
             }
             <div>
@@ -62,7 +62,7 @@
                 @if(event.creator ==false && event.eventMember == false){
                 <button mat-button [disabled]="event.currentMembers == event.maxMembers ||   event.status==='CLOSED'"
                     (click)="join()">S'inscrire</button>}
-                @else if(event.eventMember==true){
+                @else if(event.eventMember==true && event.creator ===false){
                 <button mat-button (click)="leaveEvent()">Se désister</button>
                 } @else {
                 <button mat-button [disabled]="event.status === 'CANCELLED'" (click)="updateEvent()">Modifier</button>

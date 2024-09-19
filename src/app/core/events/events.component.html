@@ -4,11 +4,10 @@
 <br/>
 
 <div class="section-title">Vos prochaines sorties</div>
-<p>//Contenu temporaire pour tester l'intégration des composants. Tri des sorties à finaliser </p>
-@if(createdEvents.length > 0) {
+@if(onGoingEvents.length > 0) {
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-  @for (ev of createdEvents; track $index) {
-  <app-event-panel [event]="ev"></app-event-panel>
+  @for (ev of onGoingEvents; track $index) {
+  <app-event-panel [alreadyRegistered]="true" [event]="ev"></app-event-panel>
   }
 </div>
 }@else{
@@ -17,58 +16,19 @@
   </div>
 }
 
-
-@if(events.length > 0){
-
+<br />
+<div class="section-title">Historique</div>
+@if(onGoingEvents.length > 0){
 <div class="table">
   <table mat-table [dataSource]="events">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Sortie</th>
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
       <td mat-cell *matCellDef="let element">{{element.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let element">{{element.startDate | date:"dd MMM YYYY à h:mm"}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="organizerName">
-      <th mat-header-cell *matHeaderCellDef>Organisateur-rice</th>
-      <td mat-cell *matCellDef="let element">{{element.organizerName}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="currentMembers">
-      <th mat-header-cell *matHeaderCellDef>Participants</th>
-      <td mat-cell *matCellDef="let element">{{element.currentMembers}}</td>
-    </ng-container>
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element">{{getConvertedStatus(element.status)}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="nextEventsColumn"></tr>
-    <tr mat-row (click)="openPage(row)" *matRowDef="let row; columns: nextEventsColumn;"></tr>
-  </table>
-</div>
-} @else{
-<div class="empty-table">
-  Aucune sortie
-</div>
-}
-<br />
-<div class="section-title">Sorties créées</div>
-@if(createdEvents.length > 0){
-<div class="table">
-  <table mat-table [dataSource]="createdEvents">
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Sortie</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="startDate">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <th mat-header-cell *matHeaderCellDef>Date de la sortie</th>
       <td mat-cell *matCellDef="let element">{{element.startDate | date:"dd MMM YYYY à h:mm"}}</td>
     </ng-container>
 

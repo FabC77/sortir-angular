@@ -22,7 +22,7 @@ export class EventsComponent {
   isLoading: boolean = true;
 
   events: UserEvent[] = [];
-  createdEvents: UserEvent[] = [];
+  onGoingEvents: UserEvent[] = [];
   nextEventsColumn: string[] = ['name', 'startDate', 'organizerName', 'currentMembers', 'status'];
   displayedColumns: string[] = ['name', 'startDate', 'currentMembers', 'status'];
 
@@ -61,10 +61,19 @@ export class EventsComponent {
   }
 
   sortEvents(data: UserEvent[]): void {
-    this.createdEvents = data.filter(element => element.organizer === true);
-  this.events = data.filter(element => element.organizer !== true);
+    this.onGoingEvents = data.filter(element => element.status !== 'CANCELLED'
+&& element.status !== 'FINISHED' 
+&& element.status !== 'ARCHIVED'
+ 
+    );
+  this.events = data.filter(element => 
+    element.status !== 'IN_PROGRESS'
+    && element.status !== 'OPEN' 
+    && element.status !== 'CLOSED'
+  
+  );
 
-  console.log("APRES TRANSFERT : createdEvents not empty? :  ",this.createdEvents.length>0);
+  console.log("APRES TRANSFERT : onGoingEvents not empty? :  ",this.onGoingEvents.length>0);
   
   }
 }

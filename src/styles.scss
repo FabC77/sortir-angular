@@ -18,7 +18,7 @@
 }
 
 .main-body {
-   
+
   padding-left: 40px;
   padding-top: 16px;
   padding-right: 40px;
@@ -64,6 +64,8 @@ app-navbar {
     display: none;
   }
 
+   
+
   .mobile {
     display: flex;
     flex-direction: row;
@@ -101,7 +103,7 @@ app-navbar {
     font-size: 23px;
     font-weight: 350;
     gap: 3px;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-right: 15px;
 
   }
@@ -307,21 +309,27 @@ app-small-navbar {
   .responsive-container mat-form-field {
     flex: 1 1 100%;
   }
-event-page, app-home, app-events{
-  padding: 5px;
-}
-  .main-body {
-    width: 100%;
-padding: 0;
+
+  event-page,
+  app-home,
+  app-events {
+    padding: 5px;
   }
 
-  .form-event {
+  .main-body {
+    width: 100%;
+    padding: 0;
+  }
+
+  .form-event search-panel {
     width: 100%;
   }
 }
 
 @media (max-width: 1300px) and (min-width:606px) {
-
+  search-panel{
+    width: 100%;
+  }
   .form-event {
     width: 80%;
   }
@@ -369,7 +377,10 @@ app-home {
 mat-form-field {
   width: 100%;
 }
-
+search-panel{
+  width: 92%;
+}
+ 
 .mat-slider-thumb-label .mat-slider-thumb {
   background-color: #29cc9b !important;
   /* Exemple avec une couleur Material Design */
@@ -423,13 +434,22 @@ mat-form-field {
 
   cursor: pointer;
 }
+.mat-mdc-table .mat-mdc-header-row {
+  background-color: $base-color-darker;
+  color: rgb(226, 226, 226);
+}
+.mat-mdc-row:nth-child(even){
+ 
+  background-color: rgb(211, 211, 211);
+}
 
 .mat-mdc-row:nth-child(odd) .mat-mdc-cell {
-  background-color: rgb(233, 233, 233);
-
+  background-color: rgb(211, 211, 211);
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
+  background-color: rgb(226, 226, 226);
+
   border-color: currentColor;
 }
 

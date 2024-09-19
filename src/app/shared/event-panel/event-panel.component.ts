@@ -20,6 +20,7 @@ export class EventPanelComponent {
   isLoading: boolean = true;
   deadlineSoon: boolean = false;
   deadlineMessage: string = '';
+  @Input()alreadyRegistered: boolean = false;
   @Input() event: any;
   eventId!: number;
 updatedRecently: boolean = false;
