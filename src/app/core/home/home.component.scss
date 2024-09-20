@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .form-search {
   width: 100%;
   display: flex;
@@ -13,26 +15,21 @@ max-width: 1000px;
   height: 52px;
   font-size: 18px;
   min-width: 200px;
-   
+   background-color: white;
+   border: 3px solid $base-color-darker; 
   flex: 1 1 calc(50% - 10px);
+  box-shadow: none;
+  outline: none; 
+  padding-left: 20px;
 
 }
-
-@media (max-width: 600px) {
-
-  .form-search mat-form-field,
-  .searchInput,
-  .dateRange,
-  .fullFilter {
-    flex: 1 1 100%;
-  }
-}
-
 .campusList {
   min-width: 160px;
-  padding-right: 12px;
-  flex: 1;
+ padding-right: 12px;
+ flex: 1;
 }
+
+
 
 .clearButton {
   justify-content: center;
@@ -51,4 +48,25 @@ max-width: 1000px;
   flex: 3;
   min-width: 160px;
   margin-top: -14px;
+}
+
+@media (max-width: 600px) {
+
+  .form-search mat-form-field,
+  .searchInput,
+  .dateRange,
+   
+  .fullFilter {
+    flex: 1 1 100%;
+  }
+
+  .campusList {
+    align-self: center;
+    width: 90% !important;
+   padding-right: 0px !important;
+   
+  }
+  .dateRange{
+    padding-right: 0px !important;
+  }
 }

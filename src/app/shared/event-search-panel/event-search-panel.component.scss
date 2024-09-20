@@ -83,13 +83,14 @@
 
 @media (max-width:605px) {
     .members {
-        visibility: hidden;
+        display: none;
     }
 
     .separation {
         padding-left: 2px;
         padding-right: 2px;
         visibility: hidden;
+        display: none;
     }
 
     .statusBlock {
@@ -98,6 +99,9 @@
 
     .date {
         min-width: 200px;
+    }
+    .name .location{
+        flex:1;
     }
 
     .container {
@@ -116,19 +120,30 @@
     .line {
         padding-top: 5px;
         padding-bottom: 5px;
-        gap: 12px;
-        justify-content: space-between;
+        // gap: 12px;
+        justify-content: flex-end;
+        // flex-direction: column;
+    }
+    .container{
+        height:100px;
     }
 
     .members {
-        visibility: hidden;
+       display: none;
     }
-
+    .date {
+        min-width:160px;
+    }
     .separation {
-        padding-left: 2px;
-        padding-right: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
         visibility: hidden;
     }
   
-
+.statusBlock{
+  flex:0.2;
+  margin-left: auto;
+  justify-content: flex-end;
+    
+}
 }
