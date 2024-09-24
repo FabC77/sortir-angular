@@ -10,21 +10,6 @@
     padding-top:14px;
 }
 
-@media (max-width: 850px) {
-    .event-page {
-        width: 100%;
-       
-    }
-    
-}
-
-@media (min-width: 851px) {
-    .event-page {
-        width: 80%;
-    }
-}
-
-
 
 .default-picture {
     background-color: rgb(163, 163, 163);
@@ -57,4 +42,25 @@
 .confirmation{
     font-style: italic;
     color: rgb(0, 190, 0);
+}
+
+
+@media (max-width: 850px) and (min-width:606px) {
+    .event-page
+    ,.right-block {
+        width: 100%;
+       
+    }
+   
+}
+@media (max-width:605px){
+    .left-block,.right-block {
+    flex:1;
+    }
+}
+
+@media (min-width: 851px) {
+    .event-page {
+        width: 80%;
+    }
 }

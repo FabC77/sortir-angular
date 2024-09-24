@@ -18,7 +18,7 @@ export class NavbarComponent {
   private baseUrl: string = environment.baseUrl;
   fullName: string = '';
 isLoggedIn: boolean = false;
-profilePicture: any='';
+profilePicture: any=null;
 
 
   constructor(private router: Router, private http: HttpClient, private authService:AuthService) { }

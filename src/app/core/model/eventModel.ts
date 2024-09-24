@@ -1,4 +1,5 @@
 import { EventStatus } from "./eventstatus.enum";
+import Member from "./member";
 
 export interface EventModel {
     id: number;
@@ -21,5 +22,6 @@ export interface EventModel {
     maxMembers: number;
     currentMembers: number;
     lastUpdated: Date;
+    members: Member[];
    
   }

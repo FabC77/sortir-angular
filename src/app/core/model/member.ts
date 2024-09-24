@@ -3,4 +3,6 @@ export default interface Member {
     lastname: String;
     username: String;
     organizer: boolean;
+    profilePicture: String;
+
 }

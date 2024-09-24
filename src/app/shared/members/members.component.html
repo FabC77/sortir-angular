@@ -1,0 +1,24 @@
+<div class="section-title">Participants</div>
+<br />
+@if(members.length==0){<p>empty</p>}
+@for (m of members; track $index) {
+<div class="line">
+    <div class="picture">
+        @if(m.profilePicture===null){
+        <img src="assets/icons/default-profil-icon.png" width="50px" height="50px" alt="default profile icon">
+        }@else {
+            <img src={{m.profilePicture}} width="50px" height="50px" alt="default profile icon" class="profile-picture">
+ 
+        }
+    </div>
+    <div class="name">
+        {{m.firstname}} {{m.lastname}}
+    </div>
+    @if($index==0){
+    <div class="organizer">
+          Organisateur(rice)
+    </div>
+    }
+</div>
+ 
+}

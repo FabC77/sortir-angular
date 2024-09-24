@@ -13,12 +13,15 @@
       <div class="user-navbar">
          @if(isLoggedIn){
          <div class="profile-container">
-            @if(profilePicture.includes('')){
+            @if(profilePicture == null){
             <div        style="justify-content: center;">
                <img 
                src="assets/icons/default-profil-icon.png" width="50px" height="50px" alt="default profile icon">
             </div>
-            }@else {}
+            }@else {
+               <img 
+               src={{profilePicture}} width="50px" height="50px" alt="default profile icon" class="profile-picture">
+            }
             <div class="profileName">
                {{fullName}}
             </div>

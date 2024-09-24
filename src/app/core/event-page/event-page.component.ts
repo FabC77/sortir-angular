@@ -10,11 +10,12 @@ import { EventStatus } from '../model/eventstatus.enum';
 import { EventModel } from '../model/eventModel';
 import { EventService } from '../../service/event.service';
 import Member from '../model/member';
+import { MembersComponent } from "../../shared/members/members.component";
 
 @Component({
   selector: 'event-page',
   standalone: true,
-  imports: [MatButton, DatePipe, TitleCasePipe],
+  imports: [MatButton, DatePipe, TitleCasePipe, MembersComponent],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.scss'
 })
@@ -40,6 +41,7 @@ export class EventPageComponent {
       next: (data: EventModel) => {
         console.log("Data received: ", data);
         this.event = data;
+        this.members = data.members;
       },
       error: (err) => {
         console.log("HTTP GET Error: ", err);
