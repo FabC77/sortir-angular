@@ -59,6 +59,9 @@
       <mat-datepicker #deadlinePicker></mat-datepicker>
     </mat-form-field>
   </div>
+  <div>
+    <app-file-upload (fileUploaded)="onFileUploaded($event)" (uploadFailed)="onFailedUpload()" (uploadCanceled)="onFailedUpload()"></app-file-upload>
+  </div>
   <br />
   <mat-checkbox   (change)="updateCheckbox($event.checked)">Enregistrer en tant que
     brouillon</mat-checkbox>

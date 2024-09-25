@@ -1,0 +1,15 @@
+
+<input type="file" (change)="onChange($event)"/>
+@if(!success){
+    <button mat-stroked-button (click)="uploadFile()" [disabled]="isLoading">Importer une image</button>
+} @else {
+    <p>Image importée avec succès !</p>
+}
+@if(success ||!isLoading){
+    <button mat-stroked-button (click)="cancelUpload()">Supprimer l'image</button>
+<p>{{cancelMessage}}</p>
+}
+
+@if(isLoading){
+    <mat-progress-spinner></mat-progress-spinner>
+}

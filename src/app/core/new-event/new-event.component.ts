@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { stringify } from 'querystring';
 import { EventService } from '../../service/event.service';
+import { FileUploadComponent } from "../../shared/file-upload/file-upload.component";
 
 
 @Component({
@@ -30,7 +31,7 @@ import { EventService } from '../../service/event.service';
     MatInputModule, MatSelectModule, MatDatepickerModule, MatIconModule,
     MatSlideToggleModule, MatButton, MatCheckboxModule, AddressInputComponent,
     FormsModule, NgxMatTimepickerModule, DurationComponent,
-    NgxMatTimepickerModule, ConfirmDialogComponent],
+    NgxMatTimepickerModule, ConfirmDialogComponent, FileUploadComponent],
   templateUrl: './new-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './new-event.component.scss'
@@ -64,9 +65,16 @@ export class NewEventComponent implements CanComponentDeactivate {
       deadline: [undefined, Validators.required],
       maxMembers: [2],
       zipCode:['',Validators.required],
+      picture:null,
     });
   }
-
+  onFileUploaded(fileName: string): void {
+    this.eventForm.patchValue({'picture':fileName});
+  }
+  onFailedUpload(): void {
+    this.eventForm.patchValue({'picture':null});
+  };
+  
   submit() {
 
     if (this.eventForm.valid) {
