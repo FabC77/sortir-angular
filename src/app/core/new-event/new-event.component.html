@@ -1,4 +1,4 @@
-<h2 class="menu-title" style="text-align: center;">Une nouvelle sortie</h2>
+<h2 class="menu-title" style="text-align: center;">Créer une nouvelle sortie</h2>
 
 
 <div class="form-event" [formGroup]="eventForm">
@@ -52,7 +52,7 @@
     <mat-form-field>
       <mat-label>Fin des inscriptions</mat-label>
       <input matInput [min]="minDate" [matDatepicker]="deadlinePicker" formControlName="deadline">
-      <mat-hint>DD/MM/YYYY</mat-hint>
+      
       <mat-datepicker-toggle matIconSuffix [for]="deadlinePicker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>

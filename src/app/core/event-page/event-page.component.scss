@@ -19,8 +19,32 @@
     align-items: center;
     justify-content: center;
     display: flex;
-     
-
+    overflow: hidden;
+    
+}
+.default-picture img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.event-picture{
+    height: 350px;
+    width: 90%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.event-picture img {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    object-fit: cover;
 }
 
 .left-block {

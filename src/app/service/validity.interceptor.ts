@@ -13,7 +13,10 @@ export function validityInterceptor(req : HttpRequest<unknown>, next: HttpHandle
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          console.log("HTTP Error Event detected");
+          console.log("HTTP Error Event detected", {
+            status: error.status,
+            message: error.message,
+          });
     
           if (error.status === 403 || error.status === 401) {
             console.log("Handling 403/401 error");

@@ -1,15 +1,20 @@
+ 
+    <input type="file" (change)="onChange($event)" class="file-uploader" #fileInput />
+   
+        @if(!isLoading){
+            @if(success){
+                <button mat-button (click)="cancelUpload()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                }@else {
+                    <button mat-button (click)="uploadFile()" [disabled]="file === null">Importer une image</button>
+                }
 
-<input type="file" (change)="onChange($event)"/>
-@if(!success){
-    <button mat-stroked-button (click)="uploadFile()" [disabled]="isLoading">Importer une image</button>
-} @else {
-    <p>Image importée avec succès !</p>
-}
-@if(success ||!isLoading){
-    <button mat-stroked-button (click)="cancelUpload()">Supprimer l'image</button>
-<p>{{cancelMessage}}</p>
-}
+        }@else if(isLoading) {
 
-@if(isLoading){
-    <mat-progress-spinner></mat-progress-spinner>
-}
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+
+        }
+   
+ 

@@ -1,4 +1,4 @@
-<p>TODO: gestion des images, modification des events, améliorer la mise en page</p>
+<p>TODO: modification des events, finaliser la mise en page</p>
 <div style="color:white; padding-bottom: 5px;">Sortie proposée par {{event.organizerName}} ({{event.campusName}}) -
     Dernière mise à jour :
     {{event.lastUpdated | date:"dd/MM/YYYY à HH:mm"}}
@@ -6,8 +6,10 @@
 <div class="event-page">
 
     <div class="left-block">
-        @if (hasPicture) {
-
+        @if (event.picture) {
+            <div class="event-picture">
+                <img src="{{event.picture}}"/>
+            </div>
         }@else {
         <div class="default-picture">
             <p>Insert default picture</p>
