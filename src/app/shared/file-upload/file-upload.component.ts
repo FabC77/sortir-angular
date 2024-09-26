@@ -46,7 +46,7 @@ export class FileUploadComponent {
         this.success = true;
       },
       error: (error) => {
-        console.error("Error uploading file:", error);
+        console.error("Error uploading file:", error.message);
         this.isLoading = false;
         this.file = null;
         this.uploadFailed.emit();
