@@ -4,14 +4,14 @@ import { UserEvent } from '../../core/model/user-event';
 import { EventModel } from '../../core/model/eventModel';
 import { EventStatusService } from '../../service/event-status.service';
 import { EventStatus } from '../../core/model/eventstatus.enum';
-import { DatePipe, TitleCasePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-event-panel',
   standalone: true,
   imports: [DatePipe, TitleCasePipe,
-    MatProgressSpinner
+    MatProgressSpinner, NgOptimizedImage
   ],
   templateUrl: './event-panel.component.html',
   styleUrl: './event-panel.component.scss'

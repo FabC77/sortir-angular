@@ -87,6 +87,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('fullName');
     localStorage.removeItem('campusId');
+    localStorage.removeItem('profilePicture');
 
     this.router.navigate(['/login']);
   }
@@ -102,6 +103,7 @@ checkTokenValidity() {
           localStorage.removeItem('authToken');
           localStorage.removeItem('campusId');
           localStorage.removeItem('fullName');
+          localStorage.removeItem('profilePicture');
 
           this.router.navigate(['/login']);
       }

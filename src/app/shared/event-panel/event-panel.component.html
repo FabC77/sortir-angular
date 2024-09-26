@@ -6,10 +6,10 @@
     <div class="event-panel-main" (click)="navigateTo()">
         <div class="image-block">
             @if(event.picture){
-                <img  loading="lazy" src={{event.picture}} width="100%" alt="event pic default" />
+                <img    src={{event.picture}} width="100%" alt="event pic default" />
 
             }@else {
-                <img  loading="lazy" src="assets/pics/default-event-picture.jpg" width="100%" alt="event pic default" />
+                <img loading="lazy"  src="assets/pics/default-event-picture.jpg" width="100%" alt="event pic default" />
             }
         </div>
         <div class="no-picture">
