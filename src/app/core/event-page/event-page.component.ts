@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environment';
 import { AuthService } from '../../service/auth.service';
 import { MatButton } from '@angular/material/button';
@@ -25,7 +25,7 @@ export class EventPageComponent {
   members!: Member[];
   form: Object = { "reason": "parce que" }
   hasPicture: boolean = false;
-  constructor(private route: ActivatedRoute, private http: HttpClient,
+  constructor(private route: ActivatedRoute, private router:Router, private http: HttpClient,
     private enumService: EventStatusService, private eventService: EventService
   ) { }
 
@@ -55,6 +55,7 @@ export class EventPageComponent {
       .subscribe({
         next: (data) => {
           console.log("ok");
+          this.router.navigate(['/events'])
         },
         error: (err) => {
           console.log("error ", err);

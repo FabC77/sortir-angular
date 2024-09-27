@@ -102,6 +102,8 @@ this.isSubmitting=true;
 
     } else {
       console.log("formulaire non envoyé" + JSON.stringify(this.eventForm.value));
+      console.log("erreurs : "+this.eventForm.errors);
+      
       this.eventForm.markAllAsTouched();
       this.isSubmitting=false;
 
@@ -170,6 +172,7 @@ this.isSubmitting=true;
   }
   onAddressSelected(location: any) {
     console.log('Address selected (in parent):', location.properties);
+      
     this.eventForm.patchValue({
       locationId: location.properties.place_id,
       address: location.properties.formatted,
@@ -179,6 +182,11 @@ this.isSubmitting=true;
       cityName: location.properties.city,
       zipCode: location.properties.postcode,
       locationNotNamed: location.properties.address_line1,
+    });
+    console.log("Coordonnées :", {
+      latitude: this.eventForm.get('latitude')?.value,
+      longitude: this.eventForm.get('longitude')?.value,
+      locationId: this.eventForm.get('locationId')?.value,
     });
   }
   updateErrorMessage() {

@@ -31,6 +31,7 @@ export class AddressInputComponent implements AfterViewInit {
 
     this.geocoderAutocomplete = new GeocoderAutocomplete(container, environment.geoApiKey, options);
     this.geocoderAutocomplete.on('select', (location) => {
+      
       this.addressSelected.emit(location);
     });
   }

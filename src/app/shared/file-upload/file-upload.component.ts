@@ -23,6 +23,7 @@ export class FileUploadComponent {
   cancelMessage!: string;
   fileName!: string;
   success: boolean = false;
+  fileSizeError: boolean=false;
 
   constructor(private fileService: FileService) { }
 
@@ -39,9 +40,21 @@ export class FileUploadComponent {
         event.target.value = '';
       } else {
         
-        console.log('Fichier accepté:', this.file);
+        console.log('Type de fichier accepté:', this.file);
       }
+ 
+    const maxSize = 3 * 1024 * 1024; 
+    if (this.file.size > maxSize) {
+      this.fileSizeError = true; 
+      event.target.value = '';
+      this.file=null;
+    } else {
+      this.fileSizeError = false;
+       
+      console.log('taille du fichier acceptée:', this.file);
     }
+
+  } 
     this.isLoading = false;
   }
 

@@ -1,4 +1,10 @@
 <div class="container">
+    @if(fileSizeError){
+        <div class="fileSizeError">
+            Le fichier dépasse 3 Mo. Veuillez sélectionner une image plus petite.
+        </div>
+
+    }
     @if(this.file && !success){
     <div style="font-style: italic; font-size: 13px; flex:1.5; min-width: 100px;"> {{this.file.name}} </div>
     }
