@@ -1,20 +1,31 @@
- 
-    <input type="file" (change)="onChange($event)" class="file-uploader" #fileInput />
-   
-        @if(!isLoading){
-            @if(success){
-                <button mat-button (click)="cancelUpload()">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                }@else {
-                    <button mat-button (click)="uploadFile()" [disabled]="file === null">Importer une image</button>
-                }
+<div class="container">
+    @if(this.file && !success){
+    <div style="font-style: italic; font-size: 13px; flex:1.5; min-width: 100px;"> {{this.file.name}} </div>
+    }
+    @if(!isLoading && !this.file && !success){
+    <label for="fileInput" class="custom-file-label">
+        Choisir une image
+    </label>
+    }
+    <input type="file" id="fileInput" (change)="onChange($event)" class="file-uploader" #fileInput
+        accept=".png, .jpg, .jpeg" hidden />
 
-        }@else if(isLoading) {
+    @if(!isLoading && this.file){
+    @if(success){
+    <p style="font-style: italic; font-size: 14px;">{{fileName}}</p>
+    <button mat-button (click)="cancelUpload()">
+        <mat-icon>delete</mat-icon>
+    </button>
+    }@else {
+    <button mat-button (click)="uploadFile()" [disabled]="file === null">Importer l'image</button>
+    <button mat-button (click)="clearFile()">
+        <mat-icon>delete</mat-icon>
+    </button>
+    }
 
-            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+    @if(isLoading && this.file) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
 
-
-        }
-   
- 
+</div>

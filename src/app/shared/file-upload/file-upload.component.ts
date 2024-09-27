@@ -29,6 +29,19 @@ export class FileUploadComponent {
   onChange(event: any) {
     this.cancelMessage = '';
     this.file = event.target.files[0];
+    if (this.file) {
+      const fileType = this.file.type;
+      const validImageTypes = ['image/png', 'image/jpeg'];
+  
+      if (!validImageTypes.includes(fileType)) {
+        alert('Veuillez sélectionner une image au format PNG ou JPEG.');
+        
+        event.target.value = '';
+      } else {
+        
+        console.log('Fichier accepté:', this.file);
+      }
+    }
     this.isLoading = false;
   }
 
@@ -73,6 +86,10 @@ export class FileUploadComponent {
     }); 
 
 
+  }
+  clearFile():void{
+    this.file = null;
+    this.fileName = '';
   }
   cancelUpload(): void {
     this.isLoading = true;

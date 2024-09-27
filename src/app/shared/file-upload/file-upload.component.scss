@@ -1,3 +1,17 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+     
+    //min-width: 400px;
+   
+     flex-wrap: wrap;
+     width: 100%;
+     gap:10px;
+    
+
+  }
+
 .file-uploader{
     border-radius: 10px;
     background-color: rgba(122, 122, 122, 0.267) !important;
@@ -6,3 +20,34 @@
     color: rgb(255, 255, 255);
      
 }
+mat-progress-bar{
+    width: 100%;
+}
+
+.custom-file-label{
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #858585c7;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    width:140px;
+    text-align: center;
+  }
+  .custom-file-label:hover {
+    background-color: #4e4e4ec7;
+  }
+
+  .custom-file-label, button, div[style*="min-width:100px"],p 
+  {
+    flex:1 1 auto;
+    min-width: 100px;
+    margin: 5px;
+
+  }
+  button{
+    background-color: #858585c7;
+    color: white !important;
+    border-radius: 4px !important;
+  }

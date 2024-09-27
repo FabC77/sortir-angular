@@ -59,7 +59,7 @@
       <mat-datepicker #deadlinePicker></mat-datepicker>
     </mat-form-field>
   </div>
-  <div>
+  <div style="justify-content: start; flex: 1; width: 100%;">
     <app-file-upload (fileUploaded)="onFileUploaded($event)" (uploadFailed)="onFailedUpload()" (uploadCanceled)="onFailedUpload()"></app-file-upload>
   </div>
   <br />
