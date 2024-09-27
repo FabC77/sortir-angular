@@ -6,7 +6,7 @@
     <div class="event-panel-main" (click)="navigateTo()">
         <div class="image-block">
             @if(event.picture){
-                <img    src={{event.picture}} width="100%" alt="event pic default" />
+                <img     [src]="s3+'event-picture/small/' + event.picture" width="100%" alt="event pic default" />
 
             }@else {
                 <img loading="lazy"  src="assets/pics/default-event-picture.jpg" width="100%" alt="event pic default" />

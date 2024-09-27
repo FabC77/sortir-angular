@@ -15,6 +15,8 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  s3: string= environment.awsS3;
+
   private baseUrl: string = environment.baseUrl;
   fullName: string = '';
 isLoggedIn: boolean = false;

@@ -8,7 +8,7 @@
     <div class="left-block">
         @if (event.picture) {
             <div class="event-picture">
-                <img src="{{event.picture}}"/>
+                <img [src]="s3+'event-picture/' + event.picture"/>
             </div>
         }@else {
         <div class="default-picture">

@@ -12,6 +12,8 @@ import { environment } from '../../../environment';
   styleUrl: './small-navbar.component.scss'
 })
 export class SmallNavbarComponent {
+  s3: string= environment.awsS3;
+
   private baseUrl: string = environment.baseUrl;
   fullName: string = '';
 isLoggedIn: boolean = false;

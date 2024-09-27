@@ -20,6 +20,7 @@ import { MembersComponent } from "../../shared/members/members.component";
   styleUrl: './event-page.component.scss'
 })
 export class EventPageComponent {
+  s3: string=environment.awsS3;
   event!: EventModel;
   members!: Member[];
   form: Object = { "reason": "parce que" }

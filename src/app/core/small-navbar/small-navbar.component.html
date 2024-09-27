@@ -48,7 +48,7 @@
                     }@else{
                         <img
                         style="padding-top:6px; padding-right: 6px;"
-                        src={{profilePicture}} width="40px" height="40px"  class="profile-picture" alt="profile mini pic">
+                        [src]="s3+'profile-picture/small/' + profilePicture"  width="40px" height="40px"  class="profile-picture" alt="profile mini pic">
                    
                      } 
                     </div>
@@ -96,7 +96,7 @@
                 }@else{
                     <img
                     style="padding-top:6px; padding-right: 6px;"
-                    src={{profilePicture}} width="40px" height="40px"  class="profile-picture" alt="profile mini pic">
+                    [src]="s3+'profile-picture/small/' + profilePicture" width="40px" height="40px"  class="profile-picture" alt="profile mini pic">
                
                  } 
                 </div>

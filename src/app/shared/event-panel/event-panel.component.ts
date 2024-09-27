@@ -6,6 +6,7 @@ import { EventStatusService } from '../../service/event-status.service';
 import { EventStatus } from '../../core/model/eventstatus.enum';
 import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-event-panel',
@@ -17,6 +18,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   styleUrl: './event-panel.component.scss'
 })
 export class EventPanelComponent {
+  s3: string= environment.awsS3;
   isLoading: boolean = true;
   deadlineSoon: boolean = false;
   deadlineMessage: string = '';
