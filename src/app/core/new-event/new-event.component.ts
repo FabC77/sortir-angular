@@ -177,22 +177,28 @@ this.isSubmitting=true;
       locationId: location.properties.place_id,
       address: location.properties.formatted,
       locationName: location.properties.name,
-      longitude: location.properties.lon,
-      latitude: location.properties.lat,
+      longitude: parseFloat(location.properties.lon),
+      latitude: parseFloat(location.properties.lat),
       cityName: location.properties.city,
       zipCode: location.properties.postcode,
       locationNotNamed: location.properties.address_line1,
     });
-    console.log("Coordonnées :", {
-      latitude: this.eventForm.get('latitude')?.value,
-      longitude: this.eventForm.get('longitude')?.value,
+    console.log("Coordonnées et autres informations :", {
       locationId: this.eventForm.get('locationId')?.value,
+      address: this.eventForm.get('address')?.value,
+      locationName: this.eventForm.get('locationName')?.value,
+      longitude: this.eventForm.get('longitude')?.value,
+      latitude: this.eventForm.get('latitude')?.value,
+      cityName: this.eventForm.get('cityName')?.value,
+      zipCode: this.eventForm.get('zipCode')?.value,
+      locationNotNamed: this.eventForm.get('locationNotNamed')?.value,
     });
   }
   updateErrorMessage() {
     const nameControl = this.eventForm.get('name');
     const deadlineControl = this.eventForm.get('deadline');
     const addressControl = this.eventForm.get('locationId');
+    const zipCodeControl = this.eventForm.get('zipCode');
 
     if (nameControl?.hasError('required')) {
       this.error.set('You must enter a name');
@@ -200,7 +206,8 @@ this.isSubmitting=true;
       this.error.set('You must enter a deadline');
     } else if (addressControl?.hasError('required')) {
       this.errorAddress = "L'adresse doit être sélectionnée";
-
+    }else if(zipCodeControl?.hasError('required')) {
+this.errorAddress = "L'adresse doit être plus précise.";
     } else {
       this.error.set('');
       this.errorAddress = '';
