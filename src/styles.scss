@@ -14,6 +14,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  margin-left:240px ;
 
 }
 
@@ -44,6 +45,8 @@ app-header {
 
 app-navbar {
   background-color: $base-color-darker;
+  position: fixed;
+  width: 240px !important;
 }
 
 @media screen and (max-width:605px) {
@@ -58,6 +61,7 @@ app-navbar {
 
   .main-content {
     margin-top: 70px;
+  margin-left: 0px;
    
   }
  
@@ -121,6 +125,8 @@ app-navbar {
 
   .main-content {
     margin-top: 60px;
+    margin-left: 0px;
+     
   }
 
 }
@@ -213,6 +219,9 @@ app-small-navbar {
   border-radius: 50%;
   object-fit: cover;
   overflow: hidden;
+}
+app-events{
+  padding-bottom: 0px;
 }
 
 @media screen and (min-width: 851px) {
